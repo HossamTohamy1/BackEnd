@@ -23,4 +23,11 @@
     <ProjectReference Include="..\loxxking-backend-clean.Shared\loxxking-backend-clean.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Watch Remove="wwwroot\**" />
+    <Watch Remove="wwwroot\uploads\**" />
+    <Watch Remove="wwwroot\uploads\**\*" />
+    <Content Update="wwwroot\**" Watch="false" />
+  </ItemGroup>
+
 </Project>

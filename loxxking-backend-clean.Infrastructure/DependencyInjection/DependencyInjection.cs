@@ -77,9 +77,18 @@ public static class DependencyInjection
         })
         .AddCookie(options =>
         {
+            options.Cookie.Name = ".Loxxking.Session";
+            options.Cookie.HttpOnly = true;
+            options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax;
+            // Secure policy is handled by ASP.NET Core environments by default but we can enforce it:
+            options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
             options.LoginPath = "/api/auth/login";
             options.AccessDeniedPath = "/api/auth/access-denied";
         });
+
+        services.AddMemoryCache();
+        services.AddSingleton<loxxking_backend_clean.Application.Common.Interfaces.ISsoJtiValidator, loxxking_backend_clean.Infrastructure.Services.MemoryCacheSsoJtiValidator>();
+
 
         services.AddSignalR();
         
@@ -92,7 +101,7 @@ public static class DependencyInjection
         services.AddScoped<IInvoicePdfGenerator, loxxking_backend_clean.Infrastructure.Services.QuestPdfInvoiceGenerator>();
         services.AddScoped<IOrderNotificationService, loxxking_backend_clean.Infrastructure.Services.OrderNotificationService>();
         services.AddScoped<IJwtProvider, loxxking_backend_clean.Infrastructure.Authentication.JwtProvider>();
-        services.AddScoped<IFileStorageService, loxxking_backend_clean.Infrastructure.Services.CloudinaryFileStorageService>();
+        services.AddScoped<IFileStorageService, loxxking_backend_clean.Infrastructure.Services.LocalFileStorageService>();
         
         services.AddScoped<ILegacyCrmSyncService, loxxking_backend_clean.Infrastructure.Services.LegacyCrmSyncService>();
         services.AddHostedService<loxxking_backend_clean.Infrastructure.Services.OrderSyncBackgroundService>();

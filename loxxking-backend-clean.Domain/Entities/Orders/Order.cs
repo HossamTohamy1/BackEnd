@@ -98,6 +98,11 @@ public class Order : BaseEntity {
         PaymentStatus = newStatus;
     }
 
+    public void SetBankTransferReceiptUrl(string url)
+    {
+        BankTransferReceiptUrl = url;
+    }
+
     public void UpdateDetails(string phone, string address, string? shipmentCode)
     {
         Phone = phone;

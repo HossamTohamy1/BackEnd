@@ -34,21 +34,80 @@ public class GetOrdersHandler : IRequestHandler<GetOrdersQuery, Result<GetOrders
 
         var totalCount = await query.CountAsync(cancellationToken);
 
-        var data = await query
+        var orders = await query
             .OrderByDescending(o => o.CreatedAt)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .Select(o => new
             {
                 o.Id,
-                CustomerName = o.Customer != null ? o.Customer.Name : "Guest",
+                o.OrderNumber,
+                CustomerName = o.Customer != null ? o.Customer.Name : (o.GuestName ?? "Guest"),
                 o.Phone,
                 o.Address,
                 Country = o.Country.Name,
                 Status = o.Status.ToString(),
+                PaymentMethod = o.PaymentMethod.ToString(),
+                PaymentStatus = o.PaymentStatus.ToString(),
+                Total = o.TotalAmount.Value,
+                TotalAmount = o.TotalAmount.Value,
+                o.City,
+                o.Area,
+                o.DeliveryCompany,
+                o.Gender,
+                o.EstimatedDelivery,
+                o.ShipmentCode,
+                o.Notes,
+                o.BankTransferReceiptUrl,
                 o.CreatedAt
             })
             .ToListAsync(cancellationToken);
+
+        var orderIds = orders.Select(o => o.Id).ToList();
+        var transfers = await _context.BankTransfers
+            .Where(bt => orderIds.Contains(bt.OrderId))
+            .Select(bt => new
+            {
+                bt.Id,
+                bt.OrderId,
+                bt.ProofImageUrl,
+                Status = bt.Status.ToString(),
+                bt.SubmittedAt
+            })
+            .ToListAsync(cancellationToken);
+
+        var transfersLookup = transfers.ToLookup(t => t.OrderId);
+
+        var data = orders.Select(o => new
+        {
+            o.Id,
+            o.OrderNumber,
+            o.CustomerName,
+            o.Phone,
+            o.Address,
+            o.Country,
+            o.Status,
+            o.PaymentMethod,
+            o.PaymentStatus,
+            o.Total,
+            o.TotalAmount,
+            o.City,
+            o.Area,
+            o.DeliveryCompany,
+            o.Gender,
+            o.EstimatedDelivery,
+            o.ShipmentCode,
+            o.Notes,
+            o.CreatedAt,
+            BankTransfers = transfersLookup[o.Id].Select(t => new
+            {
+                t.Id,
+                t.ProofImageUrl,
+                t.Status,
+                t.SubmittedAt
+            }).ToList(),
+            ProofImageUrl = transfersLookup[o.Id].Select(t => t.ProofImageUrl).FirstOrDefault() ?? o.BankTransferReceiptUrl
+        }).ToList();
 
         var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 

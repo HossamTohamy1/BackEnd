@@ -19,14 +19,15 @@ public class UploadTransferHandler : IRequestHandler<UploadTransferCommand, Resu
 
     public async Task<Result<UploadTransferResponse>> Handle(UploadTransferCommand request, CancellationToken cancellationToken)
     {
-        var allowedTypes = new[] { "image/png", "image/jpeg", "image/jpg", "image/webp" };
-        if (!allowedTypes.Contains(request.ContentType))
+        var cType = (request.ContentType ?? "").ToLowerInvariant();
+        var allowedTypes = new[] { "image/png", "image/jpeg", "image/jpg", "image/webp", "image/pjpeg", "image/x-png", "application/pdf" };
+        if (!allowedTypes.Contains(cType) && !cType.StartsWith("image/"))
         {
             return Result.Failure<UploadTransferResponse>(new Error("Error.Validation", "BankTransfer_OnlyImagesAllowed"));
         }
 
         var order = await _context.Orders
-            .FirstOrDefaultAsync(o => o.Id == request.OrderId && (o.CustomerId == request.UserId || request.UserId == Guid.Empty), cancellationToken);
+            .FirstOrDefaultAsync(o => o.Id == request.OrderId, cancellationToken);
 
         if (order is null)
         {
@@ -34,19 +35,24 @@ public class UploadTransferHandler : IRequestHandler<UploadTransferCommand, Resu
         }
 
         var existing = await _context.BankTransfers
-            .AnyAsync(bt => bt.OrderId == request.OrderId, cancellationToken);
-
-        if (existing)
-        {
-            return Result.Failure<UploadTransferResponse>(new Error("Error.Validation", "BankTransfer_AlreadySubmitted"));
-        }
+            .FirstOrDefaultAsync(bt => bt.OrderId == request.OrderId, cancellationToken);
 
         var imageUrl = await _fileStorageService.UploadAsync(request.FileStream, request.FileName, request.ContentType, "bank-transfers", cancellationToken);
 
-        var transfer = BankTransfer.Create(request.OrderId, imageUrl);
+        BankTransfer transfer;
+        if (existing != null)
+        {
+            _context.BankTransfers.Remove(existing);
+            transfer = BankTransfer.Create(request.OrderId, imageUrl);
+            _context.BankTransfers.Add(transfer);
+        }
+        else
+        {
+            transfer = BankTransfer.Create(request.OrderId, imageUrl);
+            _context.BankTransfers.Add(transfer);
+        }
 
-        _context.BankTransfers.Add(transfer);
-
+        order.SetBankTransferReceiptUrl(imageUrl);
         order.ChangePaymentStatus(PaymentStatus.PendingVerification);
         _context.Orders.Update(order);
 

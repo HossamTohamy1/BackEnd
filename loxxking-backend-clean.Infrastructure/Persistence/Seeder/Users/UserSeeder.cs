@@ -25,6 +25,7 @@ public class UserSeeder : IDataSeeder
         var targetUsers = new (string Name, string Email, string Phone, UserRole Role)[]
         {
             ("Super Admin", "admin@loxxking.com", "+201000000001", UserRole.Admin),
+            ("Luxira Admin", "admin@luxira.local", "+201000000005", UserRole.Admin),
             ("Store Manager", "manager@loxxking.com", "+201000000002", UserRole.StoreManager),
             ("Sales Employee", "sales@loxxking.com", "+201000000003", UserRole.SalesEmployee),
             ("Prime Customer", "customer@loxxking.com", "+201000000004", UserRole.Customer)

@@ -113,7 +113,7 @@ public class OrderSeeder : IDataSeeder
         var transferExists = await dbContext.BankTransfers.AnyAsync(bt => bt.OrderId == order2.Id, cancellationToken);
         if (!transferExists)
         {
-            var bankTransfer = BankTransfer.Create(order2.Id, "https://example.com/receipts/nbe-transfer-001.jpg");
+            var bankTransfer = BankTransfer.Create(order2.Id, "/assets/dashboard/sample-receipt.jpg");
             await dbContext.BankTransfers.AddAsync(bankTransfer, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
             logger.LogInformation("Seeded BankTransfer receipt for order '{OrderNumber}'.", order2Number);

@@ -1,0 +1,85 @@
+using loxxking_backend_clean.Application;
+using loxxking_backend_clean.Infrastructure.DependencyInjection;
+using loxxking_backend_clean.Infrastructure.Persistence.Seeder;
+using loxxking_backend_clean.Api;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Scalar.AspNetCore;
+
+using Serilog;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext()
+    .WriteTo.Console());
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration)
+    .AddApi();
+
+var jwtSecret = builder.Configuration["Jwt:Secret"];
+if (string.IsNullOrWhiteSpace(jwtSecret))
+{
+    throw new InvalidOperationException("CRITICAL ERROR: Jwt:Secret is missing from configuration.");
+}
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddOpenApi();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+            "http://localhost:4200",
+            "https://localhost:4200",
+            "http://127.0.0.1:4200",
+            "https://127.0.0.1:4200",
+            "http://localhost:5050"
+        )
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+    });
+});
+
+var app = builder.Build();
+
+app.MapOpenApi();
+app.MapScalarApiReference();
+
+app.UseExceptionHandler();
+
+var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
+
+loxxking_backend_clean.Api.Common.ResultExtensions.Configure(app.Services.GetRequiredService<Microsoft.AspNetCore.Http.IHttpContextAccessor>());
+
+app.UseCors("AllowFrontend");
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+app.MapHub<loxxking_backend_clean.Api.Hubs.ChatHub>("/chatHub");
+
+app.MapFallbackToFile("index.html");
+
+if (args.Contains("--seed"))
+{
+    await app.Services.SeedDatabaseAsync();
+    if (args.Length == 1 && args[0] == "--seed")
+    {
+        return;
+    }
+}
+
+app.Run();
+public partial class Program { }

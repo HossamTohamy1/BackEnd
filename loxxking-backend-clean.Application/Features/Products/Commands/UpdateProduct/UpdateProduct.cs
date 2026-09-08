@@ -1,0 +1,90 @@
+using Microsoft.Extensions.Caching.Distributed;
+
+namespace loxxking_backend_clean.Application.Features.Products.Commands.UpdateProduct;
+
+public record UpdateProductCommand(
+    Guid Id, 
+    string NameAr, 
+    string NameEn, 
+    string Description, 
+    List<string> Images,
+    string? Features,
+    string? ShippingPolicy,
+    string? ReturnPolicy,
+    decimal BasePrice
+) : IRequest<Result>;
+
+public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Result>
+{
+    private readonly IApplicationDbContext _context;
+    private readonly IFileStorageService _fileStorageService;
+    private readonly IDistributedCache _cache;
+
+    public UpdateProductHandler(IApplicationDbContext context, IFileStorageService fileStorageService, IDistributedCache cache) 
+    { 
+        _context = context; 
+        _fileStorageService = fileStorageService;
+        _cache = cache;
+    }
+
+    public async Task<Result> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+    {
+        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
+        if (product == null) return Result.Failure(new Error("Error.NotFound", "Product_NotFound"));
+
+        var imageUrls = new List<string>();
+        if (request.Images != null)
+        {
+            foreach (var imgStr in request.Images)
+            {
+                if (imgStr.StartsWith("data:image/"))
+                {
+                    var base64Data = imgStr.Substring(imgStr.IndexOf(",") + 1);
+                    var bytes = Convert.FromBase64String(base64Data);
+                    using var stream = new MemoryStream(bytes);
+                    var ext = imgStr.Split(';')[0].Split('/')[1];
+                    var fileName = $"{Guid.NewGuid()}.{ext}";
+                    var contentType = $"image/{ext}";
+                    var url = await _fileStorageService.UploadAsync(stream, fileName, contentType, "products", cancellationToken);
+                    imageUrls.Add(url);
+                }
+                else
+                {
+                    imageUrls.Add(imgStr);
+                }
+            }
+        }
+
+        var updatedImages = request.Images != null ? imageUrls : product.Images;
+        
+        product.UpdateDetails(
+            categoryId: product.CategoryId, // Unchanged in this command
+            nameAr: request.NameAr,
+            nameEn: request.NameEn,
+            description: request.Description,
+            slug: product.Slug, // Unchanged in this command
+            basePrice: loxxking_backend_clean.Domain.ValueObjects.Money.FromDecimal(request.BasePrice),
+            originalPrice: product.OriginalPrice, // Unchanged in this command
+            images: updatedImages,
+            sizes: product.Sizes,
+            colors: product.Colors,
+            features: request.Features,
+            shippingPolicy: request.ShippingPolicy,
+            returnPolicy: request.ReturnPolicy,
+            sizeChartJson: product.SizeChartJson,
+            isNew: product.IsNew,
+            isBestSeller: product.IsBestSeller,
+            badge: product.Badge
+        );
+
+        _context.Products.Update(product);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        await _cache.RemoveAsync("ProductsList_", cancellationToken);
+        await _cache.RemoveAsync($"ProductsList_{product.CategoryId}", cancellationToken);
+        await _cache.RemoveAsync($"ProductDetail_{product.Id}_ar", cancellationToken);
+        await _cache.RemoveAsync($"ProductDetail_{product.Id}_en", cancellationToken);
+
+        return Result.Success();
+    }
+}

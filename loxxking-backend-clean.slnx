@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Test/">
+    <Project Path="Test/loxxking-backend-clean.Api.IntegrationTests/loxxking-backend-clean.Api.IntegrationTests.csproj" />
+    <Project Path="Test/loxxking-backend-clean.Application.Tests/loxxking-backend-clean.Application.Tests.csproj" />
+  </Folder>
+  <Project Path="loxxking-backend-clean.Api/loxxking-backend-clean.Api.csproj" />
+  <Project Path="loxxking-backend-clean.Application/loxxking-backend-clean.Application.csproj" />
+  <Project Path="loxxking-backend-clean.Domain/loxxking-backend-clean.Domain.csproj" />
+  <Project Path="loxxking-backend-clean.Infrastructure/loxxking-backend-clean.Infrastructure.csproj" />
+  <Project Path="loxxking-backend-clean.Shared/loxxking-backend-clean.Shared.csproj" />
+</Solution>

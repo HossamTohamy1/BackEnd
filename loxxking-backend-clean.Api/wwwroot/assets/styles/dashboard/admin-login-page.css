@@ -1,0 +1,143 @@
+.lk-admin-login,
+.lk-admin-login * {
+  box-sizing: border-box;
+}
+
+.lk-admin-login {
+  min-height: 100vh;
+  color: #17191d;
+  font-family: 'Cairo', Tahoma, Arial, sans-serif;
+  background: #f7fbfc;
+}
+.lk-admin-login__mark {
+    width: 210px;
+    max-width: 80%;
+    height: auto;
+    margin: 0 auto 18px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+    .lk-admin-login__mark img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+.lk-admin-login__top {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #0f1114;
+  font-size: 21px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e5edf0;
+}
+
+.lk-admin-login__top span {
+  color: #2ba9d4;
+  font-weight: 800;
+}
+
+.lk-admin-login__top strong {
+  font-weight: 800;
+}
+
+.lk-admin-login__card {
+  width: min(calc(100% - 32px), 430px);
+  margin: 17vh auto 0;
+  text-align: center;
+}
+
+.lk-admin-login__mark {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 18px;
+  place-items: center;
+  color: #2ba9d4;
+  font-size: 20px;
+  font-weight: 800;
+  background: transparent;
+}
+
+.lk-admin-login__card h1 {
+  margin: 0 0 22px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.lk-admin-login__field {
+  position: relative;
+  display: flex;
+  height: 44px;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 14px;
+  padding: 0 14px;
+  color: #2ba9d4;
+  background: #fff;
+  border: 1.5px solid #2ba9d4;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(29, 75, 92, 0.08);
+}
+
+.lk-admin-login__field input {
+  width: 100%;
+  min-width: 0;
+  color: #4c535a;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.lk-admin-login__eye {
+  display: grid;
+  padding: 0;
+  color: #2ba9d4;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.lk-admin-login__submit {
+  min-width: 150px;
+  height: 42px;
+  margin-top: 2px;
+  padding: 0 24px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  background: #2ba9d4;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 5px 15px rgba(43, 169, 212, 0.23);
+  cursor: pointer;
+}
+
+.lk-admin-login__submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.lk-admin-login__error {
+  margin: -3px 0 12px;
+  color: #d83b3b;
+  font-size: 12px;
+}
+
+.lk-admin-login__demo {
+  margin: 18px 0 0;
+  color: #9098a0;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.7;
+}

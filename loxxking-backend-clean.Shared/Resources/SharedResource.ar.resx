@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Product.Validation.NameRequired" xml:space="preserve">
+    <value>اسم المنتج مطلوب.</value>
+  </data>
+  <data name="Product.Validation.NameMaxLength" xml:space="preserve">
+    <value>يجب ألا يتجاوز اسم المنتج 200 حرف.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>المورد غير موجود.</value>
+  </data>
+  <data name="Validation" xml:space="preserve">
+    <value>حدث خطأ في التحقق.</value>
+  </data>
+  <data name="Validation_Failed" xml:space="preserve">
+    <value>فشل التحقق من البيانات</value>
+  </data>
+  <data name="Validation_Required" xml:space="preserve">
+    <value>{0} مطلوب.</value>
+  </data>
+  <data name="Validation_FieldRequired" xml:space="preserve">
+    <value>هذا الحقل مطلوب.</value>
+  </data>
+  <data name="Validation_CannotBeEmpty" xml:space="preserve">
+    <value>لا يمكن أن يكون {0} فارغاً.</value>
+  </data>
+  <data name="Validation_CannotBeNegative" xml:space="preserve">
+    <value>لا يمكن أن يكون {0} سالباً.</value>
+  </data>
+  <data name="Validation_GreaterThanZero" xml:space="preserve">
+    <value>يجب أن يكون {0} أكبر من الصفر.</value>
+  </data>
+  <data name="Validation_Range" xml:space="preserve">
+    <value>يجب أن يكون {0} بين {1} و {2}.</value>
+  </data>
+  <data name="Validation_StringMaxLength" xml:space="preserve">
+    <value>يجب ألا يتجاوز {0} {1} حرفاً.</value>
+  </data>
+  <data name="Validation_StringMinLength" xml:space="preserve">
+    <value>يجب ألا يقل {0} عن {1} أحرف.</value>
+  </data>
+  <data name="Validation_InvalidEmail" xml:space="preserve">
+    <value>يرجى إدخال بريد إلكتروني صالح.</value>
+  </data>
+  <data name="Validation_InvalidPhone" xml:space="preserve">
+    <value>يرجى إدخال رقم هاتف صالح.</value>
+  </data>
+  <data name="Validation_InvalidStatus" xml:space="preserve">
+    <value>يجب أن تكون الحالة الجديدة صالحة.</value>
+  </data>
+  <data name="Validation_InvalidData" xml:space="preserve">
+    <value>البيانات المقدمة غير صالحة.</value>
+  </data>
+  <data name="Common_NotFound" xml:space="preserve">
+    <value>{0} غير موجود.</value>
+  </data>
+  <data name="Product_NotFound" xml:space="preserve">
+    <value>المنتج غير موجود.</value>
+  </data>
+  <data name="Product_PriceNotFound" xml:space="preserve">
+    <value>لم يتم العثور على سعر لهذا المنتج.</value>
+  </data>
+  <data name="Category_NotFound" xml:space="preserve">
+    <value>القسم غير موجود.</value>
+  </data>
+  <data name="Product_ImageRequired" xml:space="preserve">
+    <value>صورة المنتج مطلوبة.</value>
+  </data>
+  <data name="Order_NotFound" xml:space="preserve">
+    <value>الطلب غير موجود.</value>
+  </data>
+  <data name="Order_EmptyItems" xml:space="preserve">
+    <value>يجب أن يحتوي الطلب على عنصر واحد على الأقل.</value>
+  </data>
+  <data name="Order_CountryRequired" xml:space="preserve">
+    <value>تعذر تحديد دولتك. يرجى تحديد معرف الدولة.</value>
+  </data>
+  <data name="Order_InsufficientInventory" xml:space="preserve">
+    <value>المخزون غير كافٍ للمنتج {0}.</value>
+  </data>
+  <data name="Order_ConcurrencyRetry" xml:space="preserve">
+    <value>المخزون غير كافٍ، يرجى إعادة المحاولة.</value>
+  </data>
+  <data name="Order_BulkIdsNotFound" xml:space="preserve">
+    <value>أرقام الطلبات التالية غير موجودة أو تم حذفها: {0}</value>
+  </data>
+  <data name="Order_OrderIdsRequired" xml:space="preserve">
+    <value>يجب ألا تكون أرقام الطلبات فارغة.</value>
+  </data>
+  <data name="Invoice_NotFound" xml:space="preserve">
+    <value>الفاتورة غير موجودة.</value>
+  </data>
+  <data name="BankTransfer_NotFound" xml:space="preserve">
+    <value>التحويل البنكي غير موجود.</value>
+  </data>
+  <data name="BankTransfer_RejectionReasonRequired" xml:space="preserve">
+    <value>سبب الرفض مطلوب عند رفض التحويل.</value>
+  </data>
+  <data name="BankTransfer_OnlyImagesAllowed" xml:space="preserve">
+    <value>يُسمح فقط بملفات الصور (png, jpg, webp).</value>
+  </data>
+  <data name="BankTransfer_AlreadySubmitted" xml:space="preserve">
+    <value>تم بالفعل إرسال إثبات تحويل لهذا الطلب.</value>
+  </data>
+  <data name="BankTransfer_ProofRequired" xml:space="preserve">
+    <value>صورة إثبات التحويل مطلوبة.</value>
+  </data>
+  <data name="Offer_NotFound" xml:space="preserve">
+    <value>العرض غير موجود.</value>
+  </data>
+  <data name="Offer_InvalidProduct" xml:space="preserve">
+    <value>منتج غير صالح.</value>
+  </data>
+  <data name="Offer_EndDateMustBeAfterStartDate" xml:space="preserve">
+    <value>يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء.</value>
+  </data>
+  <data name="Offer_DiscountPercentRange" xml:space="preserve">
+    <value>يجب أن تكون نسبة الخصم بين 0 و 100.</value>
+  </data>
+  <data name="BundleOffer_NotFound" xml:space="preserve">
+    <value>الباقة غير موجودة.</value>
+  </data>
+  <data name="BundleOffer_PriceCannotBeNegative" xml:space="preserve">
+    <value>لا يمكن أن يكون سعر الباقة سالباً.</value>
+  </data>
+  <data name="BundleOffer_MustContainItems" xml:space="preserve">
+    <value>يجب أن تحتوي الباقة على عناصر.</value>
+  </data>
+  <data name="Review_NotFound" xml:space="preserve">
+    <value>التقييم غير موجود.</value>
+  </data>
+  <data name="Review_OnlyPurchasedProducts" xml:space="preserve">
+    <value>يمكنك فقط تقييم المنتجات التي قمت بشرائها واستلامها.</value>
+  </data>
+  <data name="Review_AlreadyReviewed" xml:space="preserve">
+    <value>لقد قمت بتقييم هذا المنتج بالفعل.</value>
+  </data>
+  <data name="Review_GuestNameRequired" xml:space="preserve">
+    <value>يرجى تقديم اسمك لإضافة تقييم كزائر.</value>
+  </data>
+  <data name="Review_RatingRange" xml:space="preserve">
+    <value>يجب أن يكون التقييم بين 1 و 5.</value>
+  </data>
+  <data name="Review_CommentRequired" xml:space="preserve">
+    <value>لا يمكن أن يكون التعليق فارغاً.</value>
+  </data>
+  <data name="Support_MessageEmpty" xml:space="preserve">
+    <value>لا يمكن أن تكون الرسالة فارغة.</value>
+  </data>
+  <data name="Favorite_LoginOrGuestRequired" xml:space="preserve">
+    <value>يجب تسجيل الدخول أو تقديم معرف زائر.</value>
+  </data>
+  <data name="Favorite_LoginRequiredToMerge" xml:space="preserve">
+    <value>يجب تسجيل الدخول لدمج مفضلة الزائر.</value>
+  </data>
+  <data name="Favorite_GuestIdRequired" xml:space="preserve">
+    <value>معرف الزائر مطلوب.</value>
+  </data>
+  <data name="Favorite_ItemNotFound" xml:space="preserve">
+    <value>العنصر غير موجود في المفضلة.</value>
+  </data>
+  <data name="Auth_InvalidCredentials" xml:space="preserve">
+    <value>بيانات الاعتماد غير صالحة.</value>
+  </data>
+  <data name="Auth_UnauthorizedAccess" xml:space="preserve">
+    <value>غير مصرح بالوصول.</value>
+  </data>
+  <data name="User_NotFound" xml:space="preserve">
+    <value>المستخدم غير موجود.</value>
+  </data>
+  <data name="User_StaffNotFound" xml:space="preserve">
+    <value>الموظف غير موجود.</value>
+  </data>
+  <data name="User_UseChangePasswordEndpoint" xml:space="preserve">
+    <value>استخدم نقطة نهاية &apos;change-password&apos; لتغيير كلمة المرور الخاصة بك.</value>
+  </data>
+  <data name="User_NoDefaultCountry" xml:space="preserve">
+    <value>لم يتم العثور على دولة افتراضية.</value>
+  </data>
+  <data name="User_CannotDeleteOwnAccount" xml:space="preserve">
+    <value>لا يمكنك حذف حسابك الخاص.</value>
+  </data>
+  <data name="User_OnlyAdminCanDeleteAdmin" xml:space="preserve">
+    <value>المسؤول فقط يمكنه حذف مسؤول آخر.</value>
+  </data>
+  <data name="User_CannotDeleteAdmin" xml:space="preserve">
+    <value>لا يمكن حذف مسؤول آخر.</value>
+  </data>
+  <data name="User_CannotDeactivateOwnAccount" xml:space="preserve">
+    <value>لا يمكنك إلغاء تفعيل حسابك الخاص.</value>
+  </data>
+  <data name="Country_NotFound" xml:space="preserve">
+    <value>الدولة غير موجودة.</value>
+  </data>
+  <data name="SiteVisit_TrackedSuccessfully" xml:space="preserve">
+    <value>تم تتبع زيارة الموقع بنجاح.</value>
+  </data>
+  <data name="Notification_NotFound" xml:space="preserve">
+    <value>الإشعار غير موجود.</value>
+  </data>
+  <data name="Notification_BankTransferApproved" xml:space="preserve">
+    <value>تمت الموافقة على التحويل البنكي. تم تأكيد طلبك الآن.</value>
+  </data>
+  <data name="Notification_BankTransferRejected" xml:space="preserve">
+    <value>تم رفض التحويل البنكي: {0}</value>
+  </data>
+  <data name="Notification_BankTransferSubmitted" xml:space="preserve">
+    <value>إثبات تحويل بنكي جديد بحاجة إلى مراجعة.</value>
+  </data>
+  <data name="Notification_OrderStatusChanged" xml:space="preserve">
+    <value>تم تغيير حالة طلبك {0} إلى {1}.</value>
+  </data>
+  <data name="Notification_ReviewApproved" xml:space="preserve">
+    <value>تمت الموافقة على تقييمك وأصبح ظاهراً الآن.</value>
+  </data>
+  <data name="Notification_ReviewNeedsModeration" xml:space="preserve">
+    <value>تقييم جديد بحاجة إلى مراجعة.</value>
+  </data>
+  <data name="Notification_SiteVisitAlert" xml:space="preserve">
+    <value>زيارة جديدة من {0} في {1}</value>
+  </data>
+  <data name="Domain_BankTransfer_RejectionReasonRequired" xml:space="preserve">
+    <value>سبب الرفض مطلوب.</value>
+  </data>
+  <data name="Domain_Category_NameArRequired" xml:space="preserve">
+    <value>الاسم بالعربية لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Category_NameEnRequired" xml:space="preserve">
+    <value>الاسم بالإنجليزية لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Category_SlugRequired" xml:space="preserve">
+    <value>المعرف اللطيف لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Country_NameRequired" xml:space="preserve">
+    <value>الاسم لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Country_CurrencyRequired" xml:space="preserve">
+    <value>العملة لا يمكن أن تكون فارغة.</value>
+  </data>
+  <data name="Domain_Favorite_ProductIdRequired" xml:space="preserve">
+    <value>معرف المنتج لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Favorite_UserOrGuestRequired" xml:space="preserve">
+    <value>يجب أن ينتمي عنصر المفضلة إلى مستخدم مسجل أو زائر.</value>
+  </data>
+  <data name="Domain_Favorite_UserIdRequired" xml:space="preserve">
+    <value>معرف المستخدم لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Inventory_ProductIdRequired" xml:space="preserve">
+    <value>معرف المنتج لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Inventory_CountryIdRequired" xml:space="preserve">
+    <value>معرف الدولة لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Inventory_InitialQuantityNegative" xml:space="preserve">
+    <value>الكمية الأولية لا يمكن أن تكون سالبة.</value>
+  </data>
+  <data name="Domain_Inventory_AmountToAddNegative" xml:space="preserve">
+    <value>الكمية المضافة لا يمكن أن تكون سالبة.</value>
+  </data>
+  <data name="Domain_Inventory_AmountToRemoveNegative" xml:space="preserve">
+    <value>الكمية المحذوفة لا يمكن أن تكون سالبة.</value>
+  </data>
+  <data name="Domain_Inventory_CannotRemoveStock" xml:space="preserve">
+    <value>لا يمكن خصم {0} من المخزون. الكمية الحالية هي {1}.</value>
+  </data>
+  <data name="Domain_Inventory_QuantityNegative" xml:space="preserve">
+    <value>الكمية لا يمكن أن تكون سالبة.</value>
+  </data>
+  <data name="Domain_Invoice_OrderIdRequired" xml:space="preserve">
+    <value>معرف الطلب لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Invoice_InvoiceNumberRequired" xml:space="preserve">
+    <value>رقم الفاتورة لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Invoice_TotalAmountRequired" xml:space="preserve">
+    <value>المبلغ الإجمالي لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Notification_UserIdRequired" xml:space="preserve">
+    <value>معرف المستخدم لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Notification_MessageRequired" xml:space="preserve">
+    <value>الرسالة لا يمكن أن تكون فارغة.</value>
+  </data>
+  <data name="Domain_BundleOffer_TitleRequired" xml:space="preserve">
+    <value>العنوان مطلوب.</value>
+  </data>
+  <data name="Domain_BundleOffer_QuantityGreaterThanZero" xml:space="preserve">
+    <value>يجب أن تكون الكمية أكبر من الصفر.</value>
+  </data>
+  <data name="Domain_Offer_ProductIdRequired" xml:space="preserve">
+    <value>معرف المنتج لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Product_CategoryIdRequired" xml:space="preserve">
+    <value>معرف القسم لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Product_NameArRequired" xml:space="preserve">
+    <value>الاسم بالعربية لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Product_NameEnRequired" xml:space="preserve">
+    <value>الاسم بالإنجليزية لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Product_SlugRequired" xml:space="preserve">
+    <value>المعرف اللطيف لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Product_BasePriceRequired" xml:space="preserve">
+    <value>السعر الأساسي لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Product_StockNegative" xml:space="preserve">
+    <value>المخزون لا يمكن أن يكون سالباً.</value>
+  </data>
+  <data name="Domain_Product_RatingRange" xml:space="preserve">
+    <value>يجب أن يكون التقييم بين 0 و 5.</value>
+  </data>
+  <data name="Domain_Product_ReviewCountNegative" xml:space="preserve">
+    <value>عدد التقييمات لا يمكن أن يكون سالباً.</value>
+  </data>
+  <data name="Domain_ProductPrice_ProductIdRequired" xml:space="preserve">
+    <value>معرف المنتج لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_ProductPrice_CountryIdRequired" xml:space="preserve">
+    <value>معرف الدولة لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_ProductPrice_PriceRequired" xml:space="preserve">
+    <value>السعر لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_Review_GuestNameRequired" xml:space="preserve">
+    <value>اسم الزائر مطلوب إذا لم يتم توفير معرف المستخدم.</value>
+  </data>
+  <data name="Domain_SiteVisit_CountryIdRequired" xml:space="preserve">
+    <value>معرف الدولة لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_SiteVisit_PageRequired" xml:space="preserve">
+    <value>الصفحة لا يمكن أن تكون فارغة.</value>
+  </data>
+  <data name="Domain_User_NameRequired" xml:space="preserve">
+    <value>الاسم لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_User_EmailRequired" xml:space="preserve">
+    <value>البريد الإلكتروني لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_User_PhoneRequired" xml:space="preserve">
+    <value>رقم الهاتف لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_User_PasswordHashRequired" xml:space="preserve">
+    <value>تشفير كلمة المرور لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_User_CountryIdRequired" xml:space="preserve">
+    <value>معرف الدولة لا يمكن أن يكون فارغاً.</value>
+  </data>
+  <data name="Domain_DateRange_StartDateAfterEndDate" xml:space="preserve">
+    <value>تاريخ البدء لا يمكن أن يكون بعد تاريخ الانتهاء.</value>
+  </data>
+  <data name="Domain_Money_CannotBeNegative" xml:space="preserve">
+    <value>المبلغ المالي لا يمكن أن يكون سالباً.</value>
+  </data>
+  <data name="Domain_Money_CannotDivideByZero" xml:space="preserve">
+    <value>لا يمكن قسمة المبلغ المالي على الصفر.</value>
+  </data>
+  <data name="Domain_Percentage_Range" xml:space="preserve">
+    <value>يجب أن تكون النسبة المئوية بين 0 و 100.</value>
+  </data>
+  <data name="Domain_RatingScore_Range" xml:space="preserve">
+    <value>يجب أن يكون التقييم بين 1 و 5.</value>
+  </data>
+  <data name="Favorites_HeaderTitle" xml:space="preserve">
+    <value>المفضلة</value>
+  </data>
+  <data name="Favorites_HeaderSubtitle" xml:space="preserve">
+    <value>قائمة بالمنتجات التي تم الإعجاب بها</value>
+  </data>
+  <data name="Favorites_AddAllToCartText" xml:space="preserve">
+    <value>إضافة جميع المنتجات إلى السلة</value>
+  </data>
+  <data name="Favorites_EmptyStateTitle" xml:space="preserve">
+    <value>قائمة المفضلة فارغة</value>
+  </data>
+  <data name="Favorites_EmptyStateSubtitle" xml:space="preserve">
+    <value>لم تقم بإضافة أي منتج إلى قائمة المفضلة بعد</value>
+  </data>
+  <data name="Favorites_EmptyStateButtonText" xml:space="preserve">
+    <value>اكتشف التسوق</value>
+  </data>
+  <data name="Offers_HeroTitle" xml:space="preserve">
+    <value>عروض خاصة</value>
+  </data>
+  <data name="Offers_HeroSubtitle" xml:space="preserve">
+    <value>أفضل الأسعار لفترة محدودة</value>
+  </data>
+  <data name="Offers_CurrentOffersTitle" xml:space="preserve">
+    <value>التخفيضات الحالية</value>
+  </data>
+  <data name="Offers_BundlesTitle" xml:space="preserve">
+    <value>وفر أكثر مع الباقات</value>
+  </data>
+  <data name="Offers_BundlesSubtitle" xml:space="preserve">
+    <value>اختار الباقة الأنسب لك بأسعار مخفضة</value>
+  </data>
+  <data name="Invoice_Header" xml:space="preserve">
+    <value>فاتورة</value>
+  </data>
+  <data name="Invoice_Number" xml:space="preserve">
+    <value>رقم الفاتورة</value>
+  </data>
+  <data name="Invoice_Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Invoice_Order" xml:space="preserve">
+    <value>الطلب</value>
+  </data>
+  <data name="Invoice_Country" xml:space="preserve">
+    <value>الدولة</value>
+  </data>
+  <data name="Invoice_CustomerInfo" xml:space="preserve">
+    <value>بيانات العميل</value>
+  </data>
+  <data name="Invoice_CustomerName" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="Invoice_CustomerEmail" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="Invoice_CustomerPhone" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="Invoice_CustomerAddress" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="Invoice_GuestOrder" xml:space="preserve">
+    <value>طلب زائر</value>
+  </data>
+  <data name="Invoice_TableProduct" xml:space="preserve">
+    <value>المنتج</value>
+  </data>
+  <data name="Invoice_TableQty" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Invoice_TableUnitPrice" xml:space="preserve">
+    <value>سعر الوحدة</value>
+  </data>
+  <data name="Invoice_TableTotal" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+  <data name="Invoice_NoItems" xml:space="preserve">
+    <value>لا توجد عناصر</value>
+  </data>
+  <data name="Invoice_TotalAmount" xml:space="preserve">
+    <value>المبلغ الإجمالي</value>
+  </data>
+  <data name="Invoice_ThankYou" xml:space="preserve">
+    <value>شكراً لتعاملكم معنا!</value>
+  </data>
+  <data name="OffersPage_DefaultHeroTitle" xml:space="preserve">
+    <value>عروض خاصة</value>
+  </data>
+  <data name="OffersPage_DefaultHeroSubtitle" xml:space="preserve">
+    <value>أفضل الأسعار لفترة محدودة</value>
+  </data>
+  <data name="OffersPage_DefaultCurrentOffersTitle" xml:space="preserve">
+    <value>التخفيضات الحالية</value>
+  </data>
+  <data name="OffersPage_DefaultBundlesTitle" xml:space="preserve">
+    <value>وفر أكثر مع الباقات</value>
+  </data>
+  <data name="OffersPage_DefaultBundlesSubtitle" xml:space="preserve">
+    <value>اختار الباقة الأنسب لك بأسعار مخفضة</value>
+  </data>
+  <data name="FavoritesPage_DefaultHeaderTitle" xml:space="preserve">
+    <value>المفضلة</value>
+  </data>
+  <data name="FavoritesPage_DefaultHeaderSubtitle" xml:space="preserve">
+    <value>قائمة بالمنتجات التي تم الإعجاب بها</value>
+  </data>
+  <data name="FavoritesPage_DefaultAddAllToCartText" xml:space="preserve">
+    <value>إضافة جميع المنتجات إلى السلة</value>
+  </data>
+  <data name="FavoritesPage_DefaultEmptyStateTitle" xml:space="preserve">
+    <value>قائمة المفضلة فارغة</value>
+  </data>
+  <data name="FavoritesPage_DefaultEmptyStateSubtitle" xml:space="preserve">
+    <value>لم تقم بإضافة أي منتج إلى قائمة المفضلة بعد</value>
+  </data>
+  <data name="FavoritesPage_DefaultEmptyStateButtonText" xml:space="preserve">
+    <value>اكتشف التسوق</value>
+  </data>
+  <data name="Favorite_AlreadyInFavorites" xml:space="preserve">
+    <value>موجود بالفعل في المفضلة.</value>
+  </data>
+  <data name="Favorite_AddedSuccessfully" xml:space="preserve">
+    <value>تمت الإضافة إلى المفضلة.</value>
+  </data>
+  <data name="Common_Guest" xml:space="preserve">
+    <value>زائر</value>
+  </data>
+</root>

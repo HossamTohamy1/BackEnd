@@ -1,0 +1,272 @@
+
+/* Shared dashboard sidebar typography and row layout.
+   Import this file after dashboard-page.css and dashboard-layout.css
+   in both DashboardPage and DashboardLayout. */
+
+.dashboard-home .dashboard-sidebar,
+.dashboard-layout-page .dashboard-sidebar,
+.dashboard-home .dashboard-sidebar button,
+.dashboard-layout-page .dashboard-sidebar button,
+.dashboard-home .dashboard-sidebar input,
+.dashboard-layout-page .dashboard-sidebar input {
+  font-family: Tahoma, Arial, sans-serif !important;
+}
+
+.dashboard-home__brand {
+  gap: 3px !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 23px !important;
+  font-weight: 400 !important;
+  letter-spacing: .2px !important;
+}
+
+.dashboard-home__brand-primary,
+.dashboard-home__brand-secondary {
+  font: inherit !important;
+  font-weight: 400 !important;
+}
+
+.dashboard-home__brand-primary {
+  color: #111 !important;
+}
+
+.dashboard-home__brand-secondary {
+  color: #2ba9d4 !important;
+}
+
+.dashboard-sidebar__nav-row,
+.dashboard-sidebar__nav button.dashboard-sidebar__nav-row {
+  min-height: 52px !important;
+  padding: 0 15px !important;
+  border-bottom: 1px solid #e6ecef !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #252b2f !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+}
+
+.dashboard-sidebar__nav-row:hover,
+.dashboard-sidebar__nav button.dashboard-sidebar__nav-row:hover,
+.dashboard-sidebar__nav-row.is-active {
+  padding-right: 15px !important;
+  background: #f7fbfc !important;
+  color: #252b2f !important;
+}
+
+.dashboard-sidebar__nav-main {
+  gap: 14px !important;
+}
+
+.dashboard-sidebar__nav-main > svg,
+.dashboard-sidebar__nav-row > svg {
+  color: #13aa9d !important;
+  stroke-width: 1.9 !important;
+}
+
+.dashboard-sidebar__nav-main > span,
+.dashboard-sidebar__submenu-page-row > span:last-child,
+.dashboard-sidebar__submenu-back,
+.dashboard-sidebar__accounts-back {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+.dashboard-sidebar__submenu-page-row {
+  min-height: 50px !important;
+  font-family: Tahoma, Arial, sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.dashboard-sidebar__submenu-title strong {
+  font-family: Tahoma, Arial, sans-serif !important;
+  font-weight: 400 !important;
+}
+
+.dashboard-sidebar__identity--name-only {
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.dashboard-sidebar__identity--name-only strong {
+  color: #111 !important;
+  font-family: Tahoma, Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+}
+
+
+/* Final sidebar wing alignment: both wings use identical size, height and edge offset. */
+.dashboard-home .dashboard-sidebar__hero::before,
+.dashboard-layout-page .dashboard-sidebar__hero::before,
+.dashboard-home .dashboard-sidebar__hero::after,
+.dashboard-layout-page .dashboard-sidebar__hero::after {
+  top: auto !important;
+  bottom: 0 !important;
+  width: 146px !important;
+  height: 100px !important;
+  opacity: 1 !important;
+  background-position: center !important;
+  background-size: 100% 100% !important;
+  -webkit-mask-position: center !important;
+  mask-position: center !important;
+  -webkit-mask-size: 100% 100% !important;
+  mask-size: 100% 100% !important;
+}
+
+.dashboard-home .dashboard-sidebar__hero::before,
+.dashboard-layout-page .dashboard-sidebar__hero::before {
+  left: -6px !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+.dashboard-home .dashboard-sidebar__hero::after,
+.dashboard-layout-page .dashboard-sidebar__hero::after {
+  right: -6px !important;
+  left: auto !important;
+  transform: scaleX(-1) !important;
+  transform-origin: center !important;
+}
+
+
+/* Final profile layout: avatar, centered name, then account-switch button. */
+.dashboard-home .dashboard-sidebar__hero,
+.dashboard-layout-page .dashboard-sidebar__hero {
+  position: relative !important;
+  display: flex !important;
+  min-height: 136px !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  overflow: hidden !important;
+  padding: 9px 42px 8px !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background: #2ba9d4 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #111 !important;
+  direction: ltr !important;
+  isolation: isolate;
+}
+
+.dashboard-home .dashboard-sidebar__hero > *,
+.dashboard-layout-page .dashboard-sidebar__hero > * {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.dashboard-home .dashboard-sidebar__avatar,
+.dashboard-layout-page .dashboard-sidebar__avatar {
+  position: relative !important;
+  display: inline-flex !important;
+  order: 1 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  margin: 0 auto !important;
+}
+
+.dashboard-home .dashboard-sidebar__identity--name-only,
+.dashboard-layout-page .dashboard-sidebar__identity--name-only {
+  position: relative !important;
+  display: flex !important;
+  order: 2 !important;
+  width: auto !important;
+  max-width: 170px !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: center !important;
+}
+
+.dashboard-home .dashboard-sidebar__identity--name-only strong,
+.dashboard-layout-page .dashboard-sidebar__identity--name-only strong {
+  display: block !important;
+  width: auto !important;
+  max-width: 170px !important;
+  margin: 0 auto !important;
+  color: #111 !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+  text-align: center !important;
+}
+
+.dashboard-home .dashboard-sidebar__switch-button,
+.dashboard-layout-page .dashboard-sidebar__switch-button,
+.dashboard-home .dashboard-sidebar__switch-placeholder,
+.dashboard-layout-page .dashboard-sidebar__switch-placeholder {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  display: inline-flex !important;
+  order: 3 !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  margin: 1px auto 0 !important;
+}
+
+.dashboard-home .dashboard-sidebar__switch-button,
+.dashboard-layout-page .dashboard-sidebar__switch-button {
+  width: 27px !important;
+  height: 27px !important;
+  min-width: 27px !important;
+  min-height: 27px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #111 !important;
+  cursor: pointer;
+}
+
+.dashboard-home .dashboard-sidebar__switch-button:hover,
+.dashboard-layout-page .dashboard-sidebar__switch-button:hover,
+.dashboard-home .dashboard-sidebar__switch-button:focus-visible,
+.dashboard-layout-page .dashboard-sidebar__switch-button:focus-visible {
+  background: rgba(255,255,255,.18) !important;
+  color: #111 !important;
+  outline: 0 !important;
+  transform: none !important;
+}
+
+.dashboard-home .dashboard-sidebar__switch-button svg,
+.dashboard-layout-page .dashboard-sidebar__switch-button svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: #111 !important;
+  stroke: currentColor !important;
+}
+
+.dashboard-home .dashboard-sidebar__switch-button::after,
+.dashboard-layout-page .dashboard-sidebar__switch-button::after {
+  display: none !important;
+}
+
+.dashboard-home .dashboard-sidebar__switch-placeholder,
+.dashboard-layout-page .dashboard-sidebar__switch-placeholder {
+  width: 27px !important;
+  height: 27px !important;
+}
+
+/* Remove the old horizontal white separators while keeping the two wing shapes. */
+.dashboard-home .dashboard-sidebar__hero,
+.dashboard-layout-page .dashboard-sidebar__hero {
+  outline: 0 !important;
+}

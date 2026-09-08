@@ -1,0 +1,538 @@
+.about-page {
+    --about-brand: #2ba9d4;
+    --about-brand-dark: #178bb0;
+    --about-brand-soft: #eefaff;
+    --about-text: #111318;
+    --about-muted: #747b89;
+    --about-border: #e4e9ef;
+    width: min(100%, 1024px);
+    min-height: 100vh;
+    margin: 0 auto;
+    background: #fff;
+    color: var(--about-text);
+    font-family: 'Cairo', 'Tajawal', Tahoma, Arial, sans-serif;
+}
+
+    .about-page,
+    .about-page * {
+        box-sizing: border-box;
+    }
+
+.about-page__container {
+    width: min(100%, 800px);
+    margin: 0 auto;
+    padding: 18px 24px 30px;
+}
+
+.about-breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    min-height: 25px;
+    color: #8b93a1;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.about-breadcrumb__home {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: #737b89;
+    text-decoration: none;
+}
+
+    .about-breadcrumb__home:hover,
+    .about-breadcrumb__home svg,
+    .about-breadcrumb__current {
+        color: var(--about-brand);
+    }
+
+.about-breadcrumb__separator {
+    color: #b2b8c2;
+}
+
+.about-breadcrumb__current {
+    font-weight: 400;
+}
+
+.about-title-block {
+    margin-top: 2px;
+    text-align: center;
+}
+
+    .about-title-block h1,
+    .about-section__title {
+        font-family: 'Cairo', 'Tajawal', Tahoma, Arial, sans-serif;
+        color: #111318;
+    }
+
+    .about-title-block h1 {
+        margin: 0;
+        font-size: 25px;
+        font-weight: 400;
+        line-height: 1.35;
+    }
+
+    .about-title-block p {
+        margin: 1px 0 0;
+        color: var(--about-muted);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+.about-intro-card {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    align-items: center;
+    min-height: 220px;
+    margin-top: 20px;
+    overflow: hidden;
+    border: 1px solid var(--about-border);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #fff, #fbfdff);
+    box-shadow: 0 3px 12px rgba(38, 73, 109, 0.025);
+}
+
+.about-intro-card__logo-wrap {
+    position: relative;
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.about-intro-card__logo-halo {
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    border: 1px solid rgba(43, 169, 212, 0.1);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(43, 169, 212, 0.07), rgba(43, 169, 212, 0.015) 62%, transparent 72%);
+}
+
+    .about-intro-card__logo-halo::after {
+        content: '';
+        position: absolute;
+        inset: 17px;
+        border-radius: inherit;
+        background: rgba(43, 169, 212, 0.018);
+    }
+
+.about-intro-card__logo {
+    position: relative;
+    z-index: 1;
+    width: 175px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.about-intro-card__text {
+    order: 2;
+    margin: 0;
+    padding: 24px 12px 24px 28px;
+    color: #626b79;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.78;
+    text-align: center;
+}
+
+.about-section {
+    margin-top: 23px;
+    text-align: center;
+}
+
+.about-section--compact {
+    margin-top: 21px;
+}
+
+.about-section--contact {
+    padding-bottom: 3px;
+}
+
+.about-section__title {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.35;
+}
+
+.about-title-underline {
+    width: 30px;
+    height: 3px;
+    margin: 3px auto 12px;
+    border-radius: 999px;
+    background: var(--about-brand);
+}
+
+.about-reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.about-reason-card {
+    min-height: 158px;
+    padding: 14px 6px 11px;
+    border: 1px solid var(--about-border);
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(48, 76, 109, 0.02);
+}
+
+.about-reason-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 9px;
+    border-radius: 50%;
+    color: var(--about-brand);
+    background: var(--about-brand-soft);
+}
+
+    .about-reason-card__icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+.about-reason-card h3 {
+    margin: 0;
+    color: #20242c;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.about-reason-card p {
+    margin: 5px 0 0;
+    color: #707887;
+    font-size: 10.5px;
+    font-weight: 400;
+    line-height: 1.55;
+    white-space: pre-line;
+}
+
+.about-wide-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 72px;
+    padding: 10px 14px;
+    border: 1px solid var(--about-border);
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(48, 76, 109, 0.02);
+}
+
+.about-wide-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: var(--about-brand);
+    background: var(--about-brand-soft);
+}
+
+    .about-wide-card__icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+.about-wide-card p {
+    flex: 1;
+    margin: 0;
+    color: #626b79;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.65;
+    text-align: center;
+}
+
+.about-values-card,
+.about-contact-card {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--about-border);
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(48, 76, 109, 0.02);
+}
+
+.about-values-card {
+    grid-template-columns: repeat(4, 1fr);
+    min-height: 58px;
+}
+
+.about-value-item {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    color: #2f3540;
+    font-size: 11.5px;
+    font-weight: 400;
+}
+
+    .about-value-item svg {
+        width: 20px;
+        height: 20px;
+        color: var(--about-brand);
+    }
+
+    .about-value-item:not(:last-child)::after,
+    .about-contact-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 12px;
+        bottom: 12px;
+        left: 0;
+        width: 1px;
+        background: #e5e9ef;
+    }
+
+.about-contact-card {
+    grid-template-columns: repeat(5, 1fr);
+    min-height: 78px;
+}
+
+.about-contact-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #3c4454;
+    font-size: 10.5px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .about-contact-item:hover {
+        color: var(--about-brand-dark);
+        background: #f8fdff;
+    }
+
+.about-contact-item__icon,
+.about-contact-item__brand-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.about-contact-item__icon--phone {
+    color: #168ad5;
+}
+
+.about-contact-item__icon--mail {
+    color: #8c3fd1;
+}
+
+.about-contact-item__brand-icon--facebook {
+    color: #2f8be6;
+}
+
+.about-contact-item__brand-icon--instagram {
+    color: #5965d8;
+}
+
+.about-contact-item__brand-icon--whatsapp {
+    color: #20b95f;
+}
+
+@media (max-width: 760px) {
+    .about-page__container {
+        padding: 16px 14px 24px;
+    }
+
+    .about-breadcrumb {
+        font-size: 11.5px;
+    }
+
+    .about-title-block h1 {
+        font-size: 24px;
+    }
+
+    .about-title-block p {
+        font-size: 12px;
+    }
+
+    .about-intro-card {
+        min-height: 205px;
+        margin-top: 16px;
+    }
+
+    .about-intro-card__logo-halo {
+        width: 165px;
+        height: 165px;
+    }
+
+    .about-intro-card__logo {
+        width: 145px;
+        height: 82px;
+    }
+
+    .about-intro-card__text {
+        padding: 18px 7px 18px 18px;
+        font-size: 12px;
+        line-height: 1.72;
+    }
+
+    .about-section {
+        margin-top: 20px;
+    }
+
+    .about-section--compact {
+        margin-top: 18px;
+    }
+
+    .about-section__title {
+        font-size: 19px;
+    }
+
+    .about-reasons-grid {
+        gap: 7px;
+    }
+
+    .about-reason-card {
+        min-height: 148px;
+        padding: 12px 3px 9px;
+    }
+
+    .about-reason-card__icon {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 8px;
+    }
+
+        .about-reason-card__icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+    .about-reason-card h3 {
+        font-size: 11.5px;
+    }
+
+    .about-reason-card p {
+        font-size: 9px;
+    }
+
+    .about-wide-card {
+        min-height: 66px;
+        padding: 8px 10px;
+    }
+
+    .about-wide-card__icon {
+        flex-basis: 43px;
+        width: 43px;
+        height: 43px;
+    }
+
+    .about-wide-card p {
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .about-values-card {
+        min-height: 54px;
+    }
+
+    .about-value-item {
+        gap: 4px;
+        font-size: 9.5px;
+    }
+
+        .about-value-item svg {
+            width: 18px;
+            height: 18px;
+        }
+
+    .about-contact-card {
+        min-height: 72px;
+    }
+
+    .about-contact-item {
+        gap: 3px;
+        font-size: 8.5px;
+    }
+
+    .about-contact-item__icon,
+    .about-contact-item__brand-icon {
+        width: 21px;
+        height: 21px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-page__container {
+        padding-inline: 10px;
+    }
+
+    .about-intro-card {
+        min-height: 185px;
+        border-radius: 14px;
+    }
+
+    .about-intro-card__logo-halo {
+        width: 138px;
+        height: 138px;
+    }
+
+    .about-intro-card__logo {
+        width: 122px;
+        height: 70px;
+    }
+
+    .about-intro-card__text {
+        padding-inline: 5px 12px;
+        font-size: 10.5px;
+    }
+
+    .about-reasons-grid {
+        gap: 5px;
+    }
+
+    .about-reason-card {
+        min-height: 135px;
+        border-radius: 11px;
+    }
+
+    .about-reason-card__icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .about-reason-card h3 {
+        font-size: 10px;
+    }
+
+    .about-reason-card p {
+        font-size: 8px;
+    }
+
+    .about-desktop-break {
+        display: none;
+    }
+
+    .about-value-item {
+        flex-direction: column;
+        gap: 2px;
+        font-size: 8px;
+    }
+
+    .about-contact-item {
+        font-size: 7.5px;
+    }
+}

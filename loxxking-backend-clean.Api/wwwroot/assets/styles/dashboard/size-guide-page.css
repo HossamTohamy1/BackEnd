@@ -1,0 +1,1246 @@
+:root {
+    --lk-size-blue: #48bae1;
+    --lk-size-blue-light: #63c8e8;
+    --lk-size-blue-dark: #35abd4;
+    --lk-size-blue-border: #8bd9ef;
+    --lk-size-blue-soft: rgba(72, 186, 225, 0.10);
+    --lk-size-dark: #081521;
+    --lk-size-text: #111318;
+    --lk-size-muted: #5e6670;
+    --lk-size-line: #e4eaf0;
+    --lk-size-soft: #f6f9fd;
+}
+
+.lk-size-guide-page,
+.lk-size-guide-page * {
+    box-sizing: border-box;
+}
+
+.lk-size-guide-page {
+    width: min(100%, 1024px);
+    margin: 0 auto;
+    padding-bottom: 12px;
+    overflow: hidden;
+    color: var(--lk-size-text);
+    font-family: 'Cairo', Tahoma, Arial, sans-serif;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+    .lk-size-guide-page a {
+        text-decoration: none;
+    }
+
+/* Hero */
+.lk-size-guide-hero {
+    position: relative;
+    display: grid;
+    height: 240px;
+    grid-template-columns: 32% 40% 28%;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(90deg, #fbfcfe 0%, #f6f9fd 53%, #fbfcfe 100%);
+    border-top: 1px solid #edf1f5;
+    border-bottom: 1px solid #edf1f5;
+    direction: ltr;
+}
+
+.lk-size-guide-hero__model {
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+}
+
+.lk-size-guide-hero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+    direction: rtl;
+    text-align: center;
+}
+
+    .lk-size-guide-hero__content h1 {
+        margin: 0;
+        color: #07111d;
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    .lk-size-guide-hero__content p {
+        margin: 13px 0 21px;
+        color: #202832;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .lk-size-guide-hero__content i {
+        display: block;
+        width: 58px;
+        height: 4px;
+        background: var(--lk-size-blue);
+        border-radius: 999px;
+    }
+
+.lk-size-guide-hero__tape {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.42;
+    mix-blend-mode: multiply;
+}
+
+/* Shared title */
+.lk-size-guide-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    margin: 0 0 17px;
+    text-align: center;
+}
+
+    .lk-size-guide-section-title h2 {
+        margin: 0;
+        color: #111820;
+        font-size: 23px;
+        font-weight: 800;
+        line-height: 1.4;
+    }
+
+    .lk-size-guide-section-title span {
+        width: 6px;
+        height: 6px;
+        background: var(--lk-size-blue);
+        border-radius: 999px;
+    }
+
+/* Measuring cards — matched to the supplied reference */
+.lk-size-guide-measuring {
+    padding: 18px 29px 0;
+}
+
+.lk-size-guide-measure-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.lk-size-guide-measure-card {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 194px;
+    grid-template-columns: 48% 52%;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e1e7ed;
+    border-radius: 12px;
+    box-shadow: 0 3px 11px rgba(18, 32, 48, 0.045);
+}
+
+/* Waist: copy on the left and photograph on the right. */
+.lk-size-guide-measure-card--waist {
+    direction: rtl;
+}
+
+/* Belly: photograph on the left and copy on the right. */
+.lk-size-guide-measure-card--belly {
+    grid-template-columns: 48% 52%;
+    direction: ltr;
+}
+
+.lk-size-guide-measure-card > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+    background: #fff;
+    opacity: 1;
+    filter: none;
+    mix-blend-mode: normal;
+}
+
+.lk-size-guide-measure-card__copy {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 24px 18px 14px;
+    direction: rtl;
+    text-align: right;
+}
+
+.lk-size-guide-step-heading {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    margin: 0 0 9px;
+    direction: rtl;
+}
+
+    .lk-size-guide-step-heading b {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        place-items: center;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1;
+        background: var(--lk-size-blue);
+        border-radius: 999px;
+    }
+
+    .lk-size-guide-step-heading h3 {
+        min-width: 0;
+        margin: 0;
+        color: #111820;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1.35;
+        white-space: nowrap;
+    }
+
+/* The explanation starts directly below the first word of the step title,
+   not below the numbered circle. */
+.lk-size-guide-measure-card__copy p {
+    width: 100%;
+    margin: 0;
+    padding-inline-start: 46px;
+    color: #27303a;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.9;
+    text-align: right;
+}
+
+.lk-size-guide-measure-icon {
+    position: absolute;
+    bottom: 12px;
+    display: block;
+    width: 58px;
+    height: 58px;
+    overflow: visible;
+}
+
+/* Both icons stay beside the inner gap, just like the reference. */
+.lk-size-guide-measure-card--waist .lk-size-guide-measure-icon {
+    left: 13px;
+}
+
+.lk-size-guide-measure-card--belly .lk-size-guide-measure-icon {
+    right: 13px;
+}
+
+/* Table */
+.lk-size-guide-chart {
+    padding: 21px 29px 0;
+}
+
+.lk-size-guide-chart-layout {
+    display: grid;
+    grid-template-columns: 246px minmax(0, 1fr);
+    gap: 23px;
+    align-items: stretch;
+    direction: ltr;
+}
+
+.lk-size-guide-note-card {
+    display: flex;
+    min-height: 362px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 26px 18px 22px;
+    background: linear-gradient(155deg, #f5f9fd 0%, #f1f6fb 100%);
+    border: 1px solid #dbe5ef;
+    border-radius: 13px;
+    direction: rtl;
+    text-align: center;
+}
+
+.lk-size-guide-note-card__icon {
+    display: grid;
+    width: 96px;
+    height: 96px;
+    place-items: center;
+    margin: 0 0 19px;
+    border: 0;
+    border-radius: 999px;
+}
+
+    .lk-size-guide-note-card__icon img {
+        display: block;
+        width: 82px;
+        height: 82px;
+        object-fit: contain;
+        object-position: center;
+    }
+
+.lk-size-guide-note-card h3 {
+    margin: 0 0 11px;
+    color: #48bae1;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.45;
+}
+
+.lk-size-guide-note-card p {
+    margin: 0;
+    color: #26313B;
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.95;
+    text-align: center;
+}
+
+    .lk-size-guide-note-card p + p {
+        margin-top: 12px;
+    }
+
+.lk-size-guide-table-wrap {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #dce4ec;
+    border-radius: 12px;
+    direction: rtl;
+}
+
+.lk-size-guide-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+    .lk-size-guide-table th,
+    .lk-size-guide-table td {
+        height: 40px;
+        padding: 6px 10px;
+        text-align: center;
+        border-left: 1px solid #dfe6ed;
+        border-bottom: 1px solid #dfe6ed;
+    }
+
+    .lk-size-guide-table thead th {
+        height: 42px;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        background: #091825;
+    }
+
+        .lk-size-guide-table thead th:first-child,
+        .lk-size-guide-table tbody th {
+            width: 18.5%;
+        }
+
+    .lk-size-guide-table tbody th {
+        color: #fff;
+        font-family: Arial, sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        background: #48bae1;
+    }
+
+    .lk-size-guide-table tbody td {
+        color: #111820;
+        font-family: Arial, 'Cairo', sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        background: #fff;
+    }
+
+    .lk-size-guide-table tbody tr:nth-child(even) td {
+        background: #f5f8fb;
+    }
+
+    .lk-size-guide-table tr:last-child th,
+    .lk-size-guide-table tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .lk-size-guide-table th:last-child,
+    .lk-size-guide-table td:last-child {
+        border-left: 0;
+    }
+
+/* Tips */
+.lk-size-guide-tips {
+    padding: 22px 29px 0;
+}
+
+.lk-size-guide-tip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+    .lk-size-guide-tip-grid article {
+        display: flex;
+        min-height: 198px;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 15px 16px;
+        background: linear-gradient(180deg, #fcfdff 0%, #f8fbfe 100%);
+        border: 1px solid #dfe6ed;
+        border-radius: 11px;
+        box-shadow: 0 1px 4px rgba(28, 44, 60, 0.02);
+        text-align: center;
+    }
+
+.lk-size-guide-tip-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 13px;
+    color: #48bae1;
+    stroke-width: 1.6;
+    flex: 0 0 auto;
+}
+
+.lk-size-guide-tip-grid h3 {
+    margin: 0 0 10px;
+    color: #111820;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.lk-size-guide-tip-grid p {
+    margin: 0;
+    color: #343e48;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.9;
+}
+
+/* Help */
+.lk-size-guide-help {
+    display: grid;
+    grid-template-columns: 34% 1px minmax(0, 1fr);
+    min-height: 139px;
+    align-items: center;
+    gap: 24px;
+    margin: 22px 40px 20px;
+    padding: 15px 27px;
+    background: linear-gradient(180deg, #fcfdff 0%, #f8fbfe 100%);
+    border: 1.5px solid #48bae1;
+    border-radius: 19px;
+    direction: ltr;
+}
+
+.lk-size-guide-help__team {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    direction: ltr;
+}
+
+    .lk-size-guide-help__team img {
+        width: 118px;
+        height: 66px;
+        object-fit: contain;
+    }
+
+    .lk-size-guide-help__team div {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 5px;
+        direction: rtl;
+        text-align: right;
+    }
+
+    .lk-size-guide-help__team strong {
+        color: #48bae1;
+        font-size: 12px;
+        font-weight: 900;
+        white-space: nowrap;
+    }
+
+    .lk-size-guide-help__team span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #5d6570;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+        .lk-size-guide-help__team span i {
+            width: 7px;
+            height: 7px;
+            background: #2dbc65;
+            border-radius: 999px;
+        }
+
+.lk-size-guide-help__divider {
+    width: 1px;
+    height: 76px;
+    background: #cfd8e2;
+}
+
+.lk-size-guide-help__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    direction: rtl;
+    text-align: center;
+}
+
+    .lk-size-guide-help__copy h2 {
+        margin: 0 0 4px;
+        color: #111820;
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    .lk-size-guide-help__copy p {
+        margin: 0 0 9px;
+        color: #505964;
+        font-size: 12px;
+    }
+
+    .lk-size-guide-help__copy a {
+        display: inline-flex;
+        width: min(100%, 333px);
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: 11px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 900;
+        background: linear-gradient(100deg, #63c8e8, #35abd4);
+        border-radius: 9px;
+    }
+
+        .lk-size-guide-help__copy a svg {
+            width: 25px;
+            height: 25px;
+        }
+
+/* Trust row */
+.lk-size-guide-trust {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    min-height: 63px;
+    margin: 0 30px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e0e6ec;
+    border-radius: 14px;
+}
+
+    .lk-size-guide-trust > div {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-width: 0;
+        padding: 8px 12px;
+    }
+
+        .lk-size-guide-trust > div:not(:last-child)::after {
+            position: absolute;
+            top: 13px;
+            bottom: 13px;
+            left: 0;
+            width: 1px;
+            content: '';
+            background: #e1e6eb;
+        }
+
+    .lk-size-guide-trust svg {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        color: #37414c;
+        stroke-width: 1.6;
+    }
+
+    .lk-size-guide-trust span {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.4;
+    }
+
+    .lk-size-guide-trust strong {
+        color: #111820;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+    .lk-size-guide-trust small {
+        color: #767e87;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+@media (max-width: 820px) {
+    .lk-size-guide-hero__content h1 {
+        font-size: clamp(34px, 6vw, 48px);
+    }
+
+    .lk-size-guide-hero__content p {
+        font-size: clamp(14px, 2.5vw, 20px);
+    }
+
+    .lk-size-guide-chart-layout {
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .lk-size-guide-table th,
+    .lk-size-guide-table td {
+        padding-inline: 5px;
+    }
+
+    .lk-size-guide-table thead th {
+        font-size: 11px;
+    }
+
+    .lk-size-guide-table tbody td {
+        font-size: 13px;
+    }
+
+    .lk-size-guide-help {
+        grid-template-columns: 38% 1px minmax(0, 1fr);
+        margin-inline: 22px;
+        gap: 14px;
+        padding-inline: 17px;
+    }
+}
+
+@media (max-width: 700px) {
+    .lk-size-guide-hero {
+        height: 228px;
+        grid-template-columns: 38% 62%;
+    }
+
+    .lk-size-guide-hero__tape {
+        display: none;
+    }
+
+    .lk-size-guide-hero__content h1 {
+        font-size: clamp(31px, 8vw, 43px);
+    }
+
+    .lk-size-guide-measuring,
+    .lk-size-guide-chart,
+    .lk-size-guide-tips {
+        padding-inline: 14px;
+    }
+
+    .lk-size-guide-measure-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lk-size-guide-measure-card {
+        min-height: 185px;
+    }
+
+    .lk-size-guide-chart-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .lk-size-guide-note-card {
+        min-height: 230px;
+    }
+
+    .lk-size-guide-table-wrap {
+        overflow-x: auto;
+    }
+
+    .lk-size-guide-table {
+        min-width: 620px;
+    }
+
+    .lk-size-guide-tip-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lk-size-guide-help {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-inline: 14px;
+        padding-block: 18px;
+    }
+
+    .lk-size-guide-help__divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .lk-size-guide-help__team {
+        justify-content: center;
+    }
+
+    .lk-size-guide-trust {
+        grid-template-columns: repeat(2, 1fr);
+        margin-inline: 14px;
+    }
+
+        .lk-size-guide-trust > div:nth-child(2)::after {
+            display: none;
+        }
+
+        .lk-size-guide-trust > div:nth-child(-n + 2) {
+            border-bottom: 1px solid #e1e6eb;
+        }
+}
+
+@media (max-width: 700px) {
+    .lk-size-guide-note-card {
+        min-height: 260px;
+        padding: 22px 16px 20px;
+    }
+
+    .lk-size-guide-note-card__icon {
+        width: 84px;
+        height: 84px;
+    }
+
+        .lk-size-guide-note-card__icon img {
+            width: 72px;
+            height: 72px;
+        }
+
+    .lk-size-guide-note-card h3 {
+        font-size: 18px;
+    }
+
+    .lk-size-guide-note-card p {
+        font-size: 13px;
+        line-height: 1.9;
+    }
+}
+
+@media (max-width: 470px) {
+    .lk-size-guide-hero {
+        height: 185px;
+        grid-template-columns: 42% 58%;
+    }
+
+    .lk-size-guide-hero__content {
+        padding-inline: 5px;
+    }
+
+        .lk-size-guide-hero__content h1 {
+            font-size: clamp(27px, 8.3vw, 35px);
+        }
+
+        .lk-size-guide-hero__content p {
+            margin-block: 8px 13px;
+            font-size: 12px;
+        }
+
+    .lk-size-guide-section-title {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+        .lk-size-guide-section-title h2 {
+            font-size: 18px;
+        }
+
+    .lk-size-guide-measure-card {
+        grid-template-columns: 45% 55%;
+    }
+
+    .lk-size-guide-measure-card__copy {
+        padding: 15px 10px 10px;
+    }
+
+    .lk-size-guide-step-heading {
+        gap: 7px;
+    }
+
+        .lk-size-guide-step-heading b {
+            width: 28px;
+            height: 28px;
+            flex-basis: 28px;
+            font-size: 16px;
+        }
+
+        .lk-size-guide-step-heading h3 {
+            font-size: 17px;
+        }
+
+    .lk-size-guide-measure-card__copy p {
+        padding-inline-start: 35px;
+        font-size: 11px;
+        line-height: 1.8;
+    }
+
+    .lk-size-guide-measure-icon {
+        width: 44px;
+        height: 44px;
+        bottom: 8px;
+    }
+
+    .lk-size-guide-measure-card--waist .lk-size-guide-measure-icon {
+        left: 8px;
+    }
+
+    .lk-size-guide-measure-card--belly .lk-size-guide-measure-icon {
+        right: 8px;
+    }
+
+    .lk-size-guide-tip-grid {
+        gap: 8px;
+    }
+
+        .lk-size-guide-tip-grid article {
+            min-height: 175px;
+            padding-inline: 9px;
+        }
+
+        .lk-size-guide-tip-grid h3 {
+            font-size: 14px;
+        }
+
+        .lk-size-guide-tip-grid p {
+            font-size: 10px;
+        }
+
+    .lk-size-guide-help__team img {
+        width: 100px;
+    }
+
+    .lk-size-guide-help__copy h2 {
+        font-size: 17px;
+    }
+
+    .lk-size-guide-trust {
+        margin-inline: 8px;
+    }
+
+        .lk-size-guide-trust > div {
+            gap: 8px;
+            padding-inline: 7px;
+        }
+
+        .lk-size-guide-trust svg {
+            width: 28px;
+            height: 28px;
+            flex-basis: 28px;
+        }
+
+        .lk-size-guide-trust strong {
+            font-size: 10px;
+        }
+
+    .lk-size-guide-help__copy .lk-whatsapp-button {
+        display: inline-flex;
+        width: 322px;
+        max-width: 100%;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 18px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1;
+        background: linear-gradient(180deg, #63c8e8 0%, #35abd4 100%);
+        border: 1px solid #8bd9ef;
+        border-radius: 12px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 1px 2px rgba(10, 65, 133, 0.08);
+        direction: rtl;
+        text-align: center;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+        .lk-size-guide-help__copy .lk-whatsapp-button:hover {
+            transform: translateY(-1px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 10px rgba(10, 65, 133, 0.14);
+        }
+
+        .lk-size-guide-help__copy .lk-whatsapp-button span {
+            display: inline-block;
+            transform: translateY(-0.5px);
+        }
+
+    .lk-whatsapp-button__icon {
+        width: 23px;
+        height: 23px;
+        flex: 0 0 23px;
+        color: #fff;
+    }
+}
+
+/* =========================================================
+   LOXX KING — size-guide turquoise + measuring motion
+========================================================= */
+/* Inline SVG presentation attributes are overridden here too. */
+.lk-size-guide-page [stroke="#168CF1"],
+.lk-size-guide-page [stroke="#178CF1"],
+.lk-size-guide-page [stroke="#127EE8"],
+.lk-size-guide-page [stroke="#087FE8"] {
+    stroke: var(--lk-size-blue) !important;
+}
+
+.lk-size-guide-page [fill="#127EE8"],
+.lk-size-guide-page [fill="#168CF1"],
+.lk-size-guide-page [fill="#178CF1"] {
+    fill: var(--lk-size-blue) !important;
+}
+
+.lk-size-guide-note-card__icon img {
+    filter: invert(67%) sepia(55%) saturate(676%) hue-rotate(154deg) brightness(93%) contrast(86%);
+}
+
+.lk-size-guide-table tbody th,
+.lk-size-guide-step-heading b {
+    background: var(--lk-size-blue);
+}
+
+.lk-size-guide-note-card h3,
+.lk-size-guide-tip-icon,
+.lk-size-guide-help__team strong {
+    color: var(--lk-size-blue);
+}
+
+.lk-size-guide-help {
+    border-color: var(--lk-size-blue);
+}
+
+.lk-size-guide-help__copy a,
+.lk-size-guide-help__copy .lk-whatsapp-button {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    font-family: 'Cairo', Tahoma, Arial, sans-serif;
+    font-weight: 500;
+    background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0) 46%), linear-gradient(180deg, var(--lk-size-blue-light) 0%, var(--lk-size-blue) 52%, var(--lk-size-blue-dark) 100%);
+    border: 1px solid var(--lk-size-blue-border);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(30,116,151,.08), 0 2px 5px rgba(72,186,225,.12);
+}
+
+@keyframes lkSizeReveal {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lkSizeFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes lkSizeFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes lkSizeTapeDrift {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(-7px) rotate(-1.2deg);
+    }
+}
+
+@keyframes lkSizeStepPulse {
+    0%, 82%, 100% {
+        box-shadow: 0 0 0 0 rgba(72,186,225,0);
+    }
+
+    90% {
+        box-shadow: 0 0 0 7px rgba(72,186,225,.15);
+    }
+}
+
+@keyframes lkSizeMeasureDash {
+    to {
+        stroke-dashoffset: -18;
+    }
+}
+
+@keyframes lkSizeTapeRoll {
+    0%, 100% {
+        transform: rotate(0deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(2.2deg) translateY(-2px);
+    }
+}
+
+@keyframes lkSizeShine {
+    0%, 68% {
+        transform: translateX(-180%) skewX(-20deg);
+        opacity: 0;
+    }
+
+    73% {
+        opacity: .42;
+    }
+
+    92%, 100% {
+        transform: translateX(190%) skewX(-20deg);
+        opacity: 0;
+    }
+}
+
+.lk-size-guide-hero__content h1,
+.lk-size-guide-hero__content p,
+.lk-size-guide-hero__content i {
+    animation: lkSizeReveal .62s cubic-bezier(.22,.8,.32,1) both;
+}
+
+.lk-size-guide-hero__content p {
+    animation-delay: .09s;
+}
+
+.lk-size-guide-hero__content i {
+    animation-delay: .18s;
+}
+
+.lk-size-guide-hero__model {
+    animation: lkSizeFromLeft .70s ease both;
+}
+
+.lk-size-guide-hero__tape {
+    transform-origin: center;
+    animation: lkSizeTapeDrift 6s ease-in-out infinite;
+    will-change: transform;
+}
+
+.lk-size-guide-measure-card--waist {
+    animation: lkSizeFromRight .65s .10s cubic-bezier(.22,.8,.32,1) both;
+}
+
+.lk-size-guide-measure-card--belly {
+    animation: lkSizeFromLeft .65s .16s cubic-bezier(.22,.8,.32,1) both;
+}
+
+.lk-size-guide-step-heading b {
+    animation: lkSizeStepPulse 3.8s ease-in-out infinite;
+}
+
+.lk-size-guide-measure-icon [stroke-dasharray] {
+    animation: lkSizeMeasureDash 3.2s linear infinite;
+}
+
+.lk-size-guide-note-card__icon img {
+    transform-origin: center;
+    animation: lkSizeTapeRoll 4.5s ease-in-out infinite;
+}
+
+.lk-size-guide-chart-layout,
+.lk-size-guide-tip-grid,
+.lk-size-guide-help,
+.lk-size-guide-trust {
+    animation: lkSizeReveal .62s .20s ease both;
+}
+
+    .lk-size-guide-tip-grid article {
+        transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+        .lk-size-guide-tip-grid article:hover {
+            transform: translateY(-4px);
+            border-color: var(--lk-size-blue-border);
+            box-shadow: 0 9px 20px rgba(72,186,225,.10);
+        }
+
+            .lk-size-guide-tip-grid article:hover .lk-size-guide-tip-icon {
+                animation: lkSizeTapeRoll .62s ease-in-out both;
+            }
+
+.lk-size-guide-table tbody tr {
+    transition: transform .18s ease, background-color .18s ease;
+}
+
+    .lk-size-guide-table tbody tr:hover td {
+        background: rgba(72,186,225,.08);
+    }
+
+.lk-size-guide-help__copy a::after,
+.lk-size-guide-help__copy .lk-whatsapp-button::after {
+    position: absolute;
+    top: -40%;
+    bottom: -40%;
+    left: -30%;
+    width: 22%;
+    content: '';
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.72), transparent);
+    animation: lkSizeShine 4.7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lk-size-guide-page * {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+    }
+}
+
+/* Mobile chart: keep the full size table visible without horizontal scrolling. */
+@media (max-width: 700px) {
+    .lk-size-guide-chart {
+        padding: 11px 6px 0;
+    }
+
+    .lk-size-guide-chart .lk-size-guide-section-title {
+        margin-bottom: 8px;
+    }
+
+    .lk-size-guide-chart-layout {
+        min-width: 0;
+        gap: 7px;
+    }
+
+    .lk-size-guide-note-card {
+        min-height: 0;
+        padding: 10px 8px 9px;
+        border-radius: 9px;
+    }
+
+    .lk-size-guide-note-card__icon {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 4px;
+    }
+
+    .lk-size-guide-note-card__icon img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .lk-size-guide-note-card h3 {
+        margin-bottom: 3px;
+        font-size: 13px;
+        line-height: 1.3;
+    }
+
+    .lk-size-guide-note-card p {
+        font-size: 9px;
+        line-height: 1.45;
+    }
+
+    .lk-size-guide-note-card p + p {
+        margin-top: 3px;
+    }
+
+    .lk-size-guide-table-wrap {
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .lk-size-guide-table {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        table-layout: fixed;
+    }
+
+    .lk-size-guide-table th,
+    .lk-size-guide-table td {
+        height: 25px;
+        padding: 2px 1px;
+        line-height: 1.15;
+    }
+
+    .lk-size-guide-table thead th {
+        height: 31px;
+        padding-inline: 1px;
+        font-size: 8px;
+        line-height: 1.25;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .lk-size-guide-table thead th:first-child,
+    .lk-size-guide-table tbody th {
+        width: 16%;
+    }
+
+    .lk-size-guide-table tbody th {
+        font-size: 10px;
+    }
+
+    .lk-size-guide-table tbody td {
+        padding-inline: 0;
+        font-size: 9px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 390px) {
+    .lk-size-guide-chart {
+        padding-inline: 4px;
+    }
+
+    .lk-size-guide-chart-layout {
+        gap: 5px;
+    }
+
+    .lk-size-guide-table th,
+    .lk-size-guide-table td {
+        height: 23px;
+    }
+
+    .lk-size-guide-table thead th {
+        height: 29px;
+        font-size: 7.2px;
+    }
+
+    .lk-size-guide-table tbody th {
+        font-size: 9px;
+    }
+
+    .lk-size-guide-table tbody td {
+        font-size: 8.2px;
+    }
+}

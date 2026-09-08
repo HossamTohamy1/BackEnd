@@ -1,0 +1,67 @@
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
+using loxxking_backend_clean.Application.Features.Products.Queries.GetProduct;
+
+namespace loxxking_backend_clean.Application.Features.Products.Queries.GetProductBySlug;
+
+public class GetProductBySlugHandler : IRequestHandler<GetProductBySlugQuery, Result<GetProductResponse>>
+{
+    private readonly IApplicationDbContext _context;
+    private readonly IDistributedCache _cache;
+
+    public GetProductBySlugHandler(IApplicationDbContext context, IDistributedCache cache)
+    {
+        _context = context;
+        _cache = cache;
+    }
+
+    public async Task<Result<GetProductResponse>> Handle(GetProductBySlugQuery request, CancellationToken cancellationToken)
+    {
+        var lang = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var cacheKey = $"ProductDetail_Slug_{request.Slug}_{lang}";
+
+        var cachedData = await _cache.GetStringAsync(cacheKey, cancellationToken);
+        if (!string.IsNullOrEmpty(cachedData))
+        {
+            var cachedProduct = JsonSerializer.Deserialize<GetProductResponse>(cachedData);
+            if (cachedProduct != null) return Result.Success(cachedProduct);
+        }
+
+        var product = await _context.Products
+            .Include(p => p.Category)
+            .Where(p => p.Slug.ToLower() == request.Slug.ToLower())
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (product is null)
+        {
+            return Result.Failure<GetProductResponse>(new Error("Error.NotFound", "Product_NotFound"));
+        }
+
+        var response = new GetProductResponse(
+            product.Id,
+            product.Slug,
+            product.NameEn,
+            product.NameAr,
+            product.Description,
+            product.Description,
+            product.BasePrice.Value,
+            product.OriginalPrice != null ? product.OriginalPrice.Value : null,
+            product.Images,
+            product.Category.NameEn,
+            product.Sizes,
+            product.SizeChartJson,
+            product.Stock,
+            product.Rating,
+            product.ReviewCount,
+            product.IsNew,
+            product.IsBestSeller,
+            product.Badge,
+            product.Colors
+        );
+
+        var options = new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30) };
+        await _cache.SetStringAsync(cacheKey, JsonSerializer.Serialize(response), options, cancellationToken);
+
+        return Result.Success(response);
+    }
+}

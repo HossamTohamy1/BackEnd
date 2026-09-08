@@ -1,0 +1,13 @@
+namespace loxxking_backend_clean.Application.Features.Offers.Commands.UpdateOffer;
+
+public class UpdateOfferValidator : AbstractValidator<UpdateOfferCommand>
+{
+    public UpdateOfferValidator(IStringLocalizer<SharedResource> localizer)
+    {
+        RuleFor(x => x.EndDate)
+            .GreaterThan(x => x.StartDate).WithMessage(localizer["Offer_EndDateMustBeAfterStartDate"]);
+
+        RuleFor(x => x.DiscountPercent)
+            .GreaterThan(0).LessThanOrEqualTo(100).WithMessage(localizer["Offer_DiscountPercentRange"]);
+    }
+}

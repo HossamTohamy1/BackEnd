@@ -1,4 +1,5 @@
 using loxxking_backend_clean.Infrastructure.Persistence.Seeder.Common;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -17,6 +18,19 @@ public static class DatabaseSeeder
         logger.LogInformation("=================================================");
         logger.LogInformation("Starting Database Seeding Process...");
         logger.LogInformation("=================================================");
+        
+        try
+        {
+            logger.LogInformation("Applying migrations before seeding...");
+            var dbContext = scopedProvider.GetRequiredService<ApplicationDbContext>();
+            await dbContext.Database.MigrateAsync(cancellationToken);
+            logger.LogInformation("Migrations applied successfully.");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to apply migrations: {Message}", ex.Message);
+            throw;
+        }
 
         var seeders = scopedProvider
             .GetServices<IDataSeeder>()

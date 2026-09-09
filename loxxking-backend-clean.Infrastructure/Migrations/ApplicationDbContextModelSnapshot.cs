@@ -1273,17 +1273,12 @@ namespace loxxking_backend_clean.Infrastructure.Migrations
                     b.Property<Guid?>("SenderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SupportConversationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SenderId");
-
-                    b.HasIndex("SupportConversationId");
 
                     b.HasIndex("ConversationId", "IsRead");
 
@@ -1740,14 +1735,15 @@ namespace loxxking_backend_clean.Infrastructure.Migrations
 
             modelBuilder.Entity("loxxking_backend_clean.Domain.Entities.Support.SupportMessage", b =>
                 {
+                    b.HasOne("loxxking_backend_clean.Domain.Entities.Support.SupportConversation", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("loxxking_backend_clean.Domain.Entities.Users.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("loxxking_backend_clean.Domain.Entities.Support.SupportConversation", null)
-                        .WithMany("Messages")
-                        .HasForeignKey("SupportConversationId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Sender");

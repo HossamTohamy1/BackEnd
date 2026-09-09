@@ -1,29 +1,90 @@
+using loxxking_backend_clean.Application.Common.Interfaces;
 using loxxking_backend_clean.Domain.Entities.Notifications;
 using loxxking_backend_clean.Domain.Entities.SiteVisits;
-
+using loxxking_backend_clean.Domain.Entities.Countries;
 
 namespace loxxking_backend_clean.Application.Features.SiteVisits.Commands.LogVisit;
 
 public class LogVisitHandler : IRequestHandler<LogVisitCommand, Result<LogVisitResponse>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IGeolocationService? _geolocationService;
+    private readonly IIpResolverService? _ipResolver;
     private readonly IStringLocalizer<SharedResource>? _localizer;
 
-    public LogVisitHandler(IApplicationDbContext context, IStringLocalizer<SharedResource>? localizer = null)
+    public LogVisitHandler(
+        IApplicationDbContext context,
+        IGeolocationService? geolocationService = null,
+        IIpResolverService? ipResolver = null,
+        IStringLocalizer<SharedResource>? localizer = null)
     {
         _context = context;
+        _geolocationService = geolocationService;
+        _ipResolver = ipResolver;
         _localizer = localizer;
     }
 
     public async Task<Result<LogVisitResponse>> Handle(LogVisitCommand request, CancellationToken cancellationToken)
     {
-        var country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == request.CountryId, cancellationToken);
-        if (country is null)
+        Country? country = null;
+
+        if (request.CountryId.HasValue)
         {
-            return Result.Failure<LogVisitResponse>(new Error("Error.NotFound", "Country_NotFound"));
+            if (request.CountryId.Value == Guid.Empty)
+            {
+                return Result.Failure<LogVisitResponse>(new Error("Error.NotFound", "Country_NotFound"));
+            }
+
+            country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == request.CountryId.Value, cancellationToken);
+            if (country == null)
+            {
+                return Result.Failure<LogVisitResponse>(new Error("Error.NotFound", "Country_NotFound"));
+            }
+        }
+        else
+        {
+            // If country not provided, try to resolve dynamically from IP if public
+            if (!string.IsNullOrWhiteSpace(request.IpAddress) && _ipResolver != null && _ipResolver.IsValidPublicIp(request.IpAddress) && _geolocationService != null)
+            {
+                try
+                {
+                    var geo = await _geolocationService.GetGeoLocationAsync(request.IpAddress, cancellationToken);
+                    if (geo != null && !string.IsNullOrEmpty(geo.CountryCode))
+                    {
+                        country = await _context.Countries
+                            .FirstOrDefaultAsync(c => 
+                                c.Name == geo.CountryName || 
+                                c.Name == geo.CountryCode || 
+                                EF.Functions.Like(c.Name, geo.CountryName + "%"), 
+                                cancellationToken);
+
+                        if (country == null)
+                        {
+                            country = Country.Create(geo.CountryName, geo.Currency, "en", isDefault: false);
+                            _context.Countries.Add(country);
+                            await _context.SaveChangesAsync(cancellationToken);
+                        }
+                    }
+                }
+                catch
+                {
+                    // Ignore geo exceptions
+                }
+            }
+
+            // Fallback to default country in DB if still not resolved
+            if (country == null)
+            {
+                country = await _context.Countries
+                    .OrderByDescending(c => c.IsDefault)
+                    .ThenBy(c => c.CreatedAt)
+                    .FirstOrDefaultAsync(cancellationToken);
+            }
         }
 
-        var siteVisit = SiteVisit.Create(request.CountryId, request.Page);
+        var countryId = country?.Id;
+
+        var siteVisit = SiteVisit.Create(countryId, request.Page, request.IpAddress);
 
         _context.SiteVisits.Add(siteVisit);
 
@@ -33,7 +94,8 @@ public class LogVisitHandler : IRequestHandler<LogVisitCommand, Result<LogVisitR
                 .Where(u => u.Role == UserRole.Admin)
                 .ToListAsync(cancellationToken);
 
-            var notifMsg = _localizer.Get("Notification_SiteVisitAlert", $"New visit from {country.Name} on {request.Page}", country.Name, request.Page);
+            var countryName = country?.Name ?? "Unknown Country";
+            var notifMsg = _localizer?.Get("Notification_SiteVisitAlert", $"New visit from {countryName} on {request.Page}", countryName, request.Page) ?? $"New visit from {countryName} on {request.Page}";
             foreach (var admin in admins)
             {
                 _context.Notifications.Add(Notification.Create(

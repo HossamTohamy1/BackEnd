@@ -1,3 +1,4 @@
+using loxxking_backend_clean.Application.Common.Interfaces;
 using loxxking_backend_clean.Application.Features.SiteVisits.Commands.LogVisit;
 using loxxking_backend_clean.Application.Features.SiteVisits.Queries.GetTodayCount;
 using loxxking_backend_clean.Application.Features.SiteVisits.Queries.GetVisits;
@@ -9,17 +10,20 @@ namespace loxxking_backend_clean.Api.Controllers;
 public class SiteVisitsController : ControllerBase
 {
     private readonly ISender _sender;
+    private readonly IIpResolverService _ipResolver;
 
-    public SiteVisitsController(ISender sender)
+    public SiteVisitsController(ISender sender, IIpResolverService ipResolver)
     {
         _sender = sender;
+        _ipResolver = ipResolver;
     }
 
     [HttpPost]
     [AllowAnonymous]
     public async Task<IActionResult> LogVisit([FromBody] LogVisitRequest request, CancellationToken cancellationToken)
     {
-        var command = new LogVisitCommand(request.CountryId, request.Page);
+        var ip = _ipResolver.GetClientIpAddress();
+        var command = new LogVisitCommand(request.CountryId, request.Page, ip);
         var result = await _sender.Send(command, cancellationToken);
         return result.ToApiResponse();
     }
@@ -49,4 +53,4 @@ public class SiteVisitsController : ControllerBase
     }
 }
 
-public record LogVisitRequest(Guid CountryId, string Page);
+public record LogVisitRequest(Guid? CountryId, string Page);

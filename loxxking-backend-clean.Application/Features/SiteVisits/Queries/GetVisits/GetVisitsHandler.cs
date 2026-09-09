@@ -34,9 +34,10 @@ public class GetVisitsHandler : IRequestHandler<GetVisitsQuery, Result<GetVisits
             .Select(sv => new
             {
                 sv.Id,
-                CountryName = sv.Country.Name,
+                CountryName = sv.Country != null ? sv.Country.Name : null,
                 sv.Page,
-                sv.VisitedAt
+                sv.VisitedAt,
+                sv.IpAddress
             })
             .ToListAsync(cancellationToken);
 

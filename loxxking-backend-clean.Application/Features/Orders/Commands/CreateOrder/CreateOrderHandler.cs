@@ -36,6 +36,15 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Result<Cre
 
         var currentUserId = _currentUserService.UserId;
 
+        if (currentUserId != Guid.Empty)
+        {
+            var userExists = await _context.Users.AnyAsync(u => u.Id == currentUserId, cancellationToken);
+            if (!userExists)
+            {
+                currentUserId = Guid.Empty;
+            }
+        }
+
         if (request.CountryId.HasValue && request.CountryId.Value != Guid.Empty)
         {
             finalCountryId = request.CountryId.Value;

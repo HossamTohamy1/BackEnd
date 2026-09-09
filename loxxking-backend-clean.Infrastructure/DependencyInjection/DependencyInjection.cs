@@ -80,7 +80,6 @@ public static class DependencyInjection
             options.Cookie.Name = ".Loxxking.Session";
             options.Cookie.HttpOnly = true;
             options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax;
-            // Secure policy is handled by ASP.NET Core environments by default but we can enforce it:
             options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
             options.LoginPath = "/api/auth/login";
             options.AccessDeniedPath = "/api/auth/access-denied";
@@ -104,6 +103,8 @@ public static class DependencyInjection
         services.AddScoped<IFileStorageService, loxxking_backend_clean.Infrastructure.Services.LocalFileStorageService>();
         
         services.AddScoped<ILegacyCrmSyncService, loxxking_backend_clean.Infrastructure.Services.LegacyCrmSyncService>();
+        services.AddScoped<IIpResolverService, loxxking_backend_clean.Infrastructure.Services.IpResolverService>();
+        services.AddScoped<IGeolocationService, loxxking_backend_clean.Infrastructure.Services.GeolocationService>();
         services.AddHostedService<loxxking_backend_clean.Infrastructure.Services.OrderSyncBackgroundService>();
 
         services.AddSeeders();

@@ -47,6 +47,15 @@ public class SupportChatController : ControllerBase
     [HttpPost("conversations/{conversationId}/read")]
     [Authorize(Roles = "Admin,StoreManager,SalesEmployee")]
     public async Task<IActionResult> MarkRead(Guid conversationId, CancellationToken ct) => (await _sender.Send(new MarkConversationReadCommand(conversationId), ct)).ToApiResponse();
+
+    [HttpGet("conversations/my")]
+    [Authorize]
+    public async Task<IActionResult> GetMyConversation(CancellationToken ct)
+    {
+        var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value ?? User.FindFirst("nameid")?.Value;
+        if (!Guid.TryParse(userIdStr, out var userId)) return Unauthorized();
+        return (await _sender.Send(new loxxking_backend_clean.Application.Features.Support.Queries.GetMyConversation.GetMyConversationQuery(userId), ct)).ToApiResponse();
+    }
 }
 
 public record ChatMessageInputDto(string? Text, string? Message, string? Sender);

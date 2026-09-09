@@ -21,13 +21,19 @@ public class ReviewsController : ControllerBase
     {
         if (productId.HasValue && productId.Value != Guid.Empty)
         {
-            return (await _sender.Send(new GetReviewsByProductQuery(productId.Value), ct)).ToApiResponse();
+            var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value ?? User.FindFirst("nameid")?.Value;
+            var userId = userIdStr is not null && Guid.TryParse(userIdStr, out var id) ? (Guid?)id : null;
+            return (await _sender.Send(new GetReviewsByProductQuery(productId.Value, userId), ct)).ToApiResponse();
         }
         return (await _sender.Send(new GetPendingReviewsQuery(), ct)).ToApiResponse();
     }
 
     [HttpGet("product/{productId}")]
-    public async Task<IActionResult> GetByProduct(Guid productId, CancellationToken ct) => (await _sender.Send(new GetReviewsByProductQuery(productId), ct)).ToApiResponse();
+    public async Task<IActionResult> GetByProduct(Guid productId, CancellationToken ct) {
+        var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value ?? User.FindFirst("nameid")?.Value;
+        var userId = userIdStr is not null && Guid.TryParse(userIdStr, out var id) ? (Guid?)id : null;
+        return (await _sender.Send(new GetReviewsByProductQuery(productId, userId), ct)).ToApiResponse();
+    }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateReviewCommand cmd, CancellationToken ct) {

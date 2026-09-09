@@ -78,15 +78,15 @@ public class SubmitReviewHandler : IRequestHandler<SubmitReviewCommand, Result>
 
             adminId = await _context.Users.Where(u => u.Role == UserRole.Admin).Select(u => u.Id).FirstOrDefaultAsync(cancellationToken);
 
-            conversation.AddMessage(
-                adminId, // sender
-                request.UserId, // recipient
-                "أهلاً بك، معك أستاذ سعيد من دعم LOXXKING، تم التواصل معك بخصوص تعليقك.",
-                null,
-                null,
-                review.Id,
-                "سعيد"
-            );
+            var supportMessage = new SupportMessage {
+                SenderId = adminId,
+                RecipientId = request.UserId,
+                Message = "أهلاً بك في متجر LOXXKING، معك أستاذة فاطمة من الدعم، هنا لمساعدتك.",
+                RelatedReviewId = review.Id,
+                GuestName = "Support",
+                ConversationId = conversation.Id
+            };
+            _context.SupportMessages.Add(supportMessage);
 
             conversationIdToNotify = conversation.Id;
         }
@@ -100,8 +100,8 @@ public class SubmitReviewHandler : IRequestHandler<SubmitReviewCommand, Result>
                 await _notificationService.NotifyMessageReceivedAsync(
                     conversationIdToNotify.Value.ToString(),
                     adminId,
-                    "سعيد",
-                    "أهلاً بك، معك أستاذ سعيد من دعم LOXXKING، تم التواصل معك بخصوص تعليقك.",
+                    "Support",
+                    "أهلاً بك في متجر LOXXKING، معك أستاذة فاطمة من الدعم، هنا لمساعدتك.",
                     DateTime.UtcNow
                 );
             }

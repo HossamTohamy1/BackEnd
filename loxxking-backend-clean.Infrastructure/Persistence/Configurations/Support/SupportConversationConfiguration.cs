@@ -8,5 +8,9 @@ public class SupportConversationConfiguration : IEntityTypeConfiguration<Support
     {
         builder.Metadata.FindNavigation(nameof(SupportConversation.Messages))!
             .SetPropertyAccessMode(PropertyAccessMode.Field);
+
+        builder.HasMany(c => c.Messages)
+            .WithOne()
+            .HasForeignKey(m => m.ConversationId);
     }
 }

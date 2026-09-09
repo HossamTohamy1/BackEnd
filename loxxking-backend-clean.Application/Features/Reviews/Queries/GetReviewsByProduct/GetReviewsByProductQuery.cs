@@ -1,6 +1,6 @@
 namespace loxxking_backend_clean.Application.Features.Reviews.Queries.GetReviewsByProduct;
 
-public record GetReviewsByProductQuery(Guid ProductId, Guid? CurrentUserId = null) : IRequest<Result<List<GetReviewsByProductResponse>>>;
+public record GetReviewsByProductQuery(Guid ProductId, Guid? CurrentUserId = null, string? GuestId = null) : IRequest<Result<List<GetReviewsByProductResponse>>>;
 
 public record GetReviewsByProductResponse(
     Guid Id,

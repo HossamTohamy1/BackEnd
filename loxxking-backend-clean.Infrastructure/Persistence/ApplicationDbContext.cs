@@ -48,6 +48,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
     public new DbSet<User> Users => Set<User>();
     public DbSet<FavoriteItem> FavoriteItems { get; set; }
     public DbSet<FavoritesPageConfig> FavoritesPageConfigs => Set<FavoritesPageConfig>();
+    public DbSet<loxxking_backend_clean.Domain.Entities.HomePage.HomePageConfig> HomePageConfigs => Set<loxxking_backend_clean.Domain.Entities.HomePage.HomePageConfig>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

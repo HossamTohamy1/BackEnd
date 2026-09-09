@@ -63,8 +63,15 @@
     align-items: center;
     justify-content: center;
     padding-top: 4px;
-    direction: rtl;
     text-align: center;
+}
+
+[dir="rtl"] .lk-size-guide-hero__content {
+    direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-hero__content {
+    direction: ltr;
 }
 
     .lk-size-guide-hero__content h1 {
@@ -139,8 +146,7 @@
     position: relative;
     display: grid;
     min-width: 0;
-    min-height: 194px;
-    grid-template-columns: 48% 52%;
+    min-height: 215px;
     overflow: hidden;
     background: #fff;
     border: 1px solid #e1e7ed;
@@ -148,15 +154,30 @@
     box-shadow: 0 3px 11px rgba(18, 32, 48, 0.045);
 }
 
-/* Waist: copy on the left and photograph on the right. */
+/* Waist card: copy on the left and photograph on the right */
 .lk-size-guide-measure-card--waist {
-    direction: rtl;
+    grid-template-columns: 52% 48%;
 }
 
-/* Belly: photograph on the left and copy on the right. */
+.lk-size-guide-measure-card--waist > img {
+    order: 2;
+}
+
+.lk-size-guide-measure-card--waist .lk-size-guide-measure-card__copy {
+    order: 1;
+}
+
+/* Belly card: photograph on the left and copy on the right */
 .lk-size-guide-measure-card--belly {
     grid-template-columns: 48% 52%;
-    direction: ltr;
+}
+
+.lk-size-guide-measure-card--belly > img {
+    order: 1;
+}
+
+.lk-size-guide-measure-card--belly .lk-size-guide-measure-card__copy {
+    order: 2;
 }
 
 .lk-size-guide-measure-card > img {
@@ -179,9 +200,17 @@
     height: 100%;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 24px 18px 14px;
+    padding: 22px 18px 14px;
+}
+
+[dir="rtl"] .lk-size-guide-measure-card__copy {
     direction: rtl;
     text-align: right;
+}
+
+[dir="ltr"] .lk-size-guide-measure-card__copy {
+    direction: ltr;
+    text-align: left;
 }
 
 .lk-size-guide-step-heading {
@@ -189,20 +218,27 @@
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 10px;
     margin: 0 0 9px;
+}
+
+[dir="rtl"] .lk-size-guide-step-heading {
     direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-step-heading {
+    direction: ltr;
 }
 
     .lk-size-guide-step-heading b {
         display: grid;
-        width: 34px;
-        height: 34px;
-        flex: 0 0 34px;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
         place-items: center;
         color: #fff;
         font-family: Arial, sans-serif;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 800;
         line-height: 1;
         background: var(--lk-size-blue);
@@ -213,41 +249,54 @@
         min-width: 0;
         margin: 0;
         color: #111820;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 800;
-        line-height: 1.35;
+        line-height: 1.3;
         white-space: nowrap;
     }
 
-/* The explanation starts directly below the first word of the step title,
-   not below the numbered circle. */
 .lk-size-guide-measure-card__copy p {
     width: 100%;
     margin: 0;
-    padding-inline-start: 46px;
     color: #27303a;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    line-height: 1.9;
+    line-height: 1.65;
+}
+
+[dir="rtl"] .lk-size-guide-measure-card__copy p {
     text-align: right;
+    padding-right: 42px;
+    padding-left: 0;
+}
+
+[dir="ltr"] .lk-size-guide-measure-card__copy p {
+    text-align: left;
+    padding-left: 42px;
+    padding-right: 0;
 }
 
 .lk-size-guide-measure-icon {
     position: absolute;
     bottom: 12px;
     display: block;
-    width: 58px;
-    height: 58px;
+    width: 48px;
+    height: 48px;
     overflow: visible;
 }
 
-/* Both icons stay beside the inner gap, just like the reference. */
-.lk-size-guide-measure-card--waist .lk-size-guide-measure-icon {
-    left: 13px;
+/* In RTL, step number circle is on the top-right, so icon is placed underneath it on the right */
+[dir="rtl"] .lk-size-guide-measure-card--waist .lk-size-guide-measure-icon,
+[dir="rtl"] .lk-size-guide-measure-card--belly .lk-size-guide-measure-icon {
+    right: 14px;
+    left: auto;
 }
 
-.lk-size-guide-measure-card--belly .lk-size-guide-measure-icon {
-    right: 13px;
+/* In LTR, step number circle is on the top-left, so icon is placed underneath it on the left */
+[dir="ltr"] .lk-size-guide-measure-card--waist .lk-size-guide-measure-icon,
+[dir="ltr"] .lk-size-guide-measure-card--belly .lk-size-guide-measure-icon {
+    left: 14px;
+    right: auto;
 }
 
 /* Table */
@@ -260,6 +309,13 @@
     grid-template-columns: 246px minmax(0, 1fr);
     gap: 23px;
     align-items: stretch;
+}
+
+[dir="rtl"] .lk-size-guide-chart-layout {
+    direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-chart-layout {
     direction: ltr;
 }
 
@@ -273,8 +329,15 @@
     background: linear-gradient(155deg, #f5f9fd 0%, #f1f6fb 100%);
     border: 1px solid #dbe5ef;
     border-radius: 13px;
-    direction: rtl;
     text-align: center;
+}
+
+[dir="rtl"] .lk-size-guide-note-card {
+    direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-note-card {
+    direction: ltr;
 }
 
 .lk-size-guide-note-card__icon {
@@ -321,7 +384,14 @@
     background: #fff;
     border: 1px solid #dce4ec;
     border-radius: 12px;
+}
+
+[dir="rtl"] .lk-size-guide-table-wrap {
     direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-table-wrap {
+    direction: ltr;
 }
 
 .lk-size-guide-table {
@@ -336,8 +406,29 @@
         height: 40px;
         padding: 6px 10px;
         text-align: center;
-        border-left: 1px solid #dfe6ed;
         border-bottom: 1px solid #dfe6ed;
+    }
+
+    [dir="rtl"] .lk-size-guide-table th,
+    [dir="rtl"] .lk-size-guide-table td {
+        border-left: 1px solid #dfe6ed;
+        border-right: 0;
+    }
+
+    [dir="rtl"] .lk-size-guide-table th:last-child,
+    [dir="rtl"] .lk-size-guide-table td:last-child {
+        border-left: 0;
+    }
+
+    [dir="ltr"] .lk-size-guide-table th,
+    [dir="ltr"] .lk-size-guide-table td {
+        border-right: 1px solid #dfe6ed;
+        border-left: 0;
+    }
+
+    [dir="ltr"] .lk-size-guide-table th:last-child,
+    [dir="ltr"] .lk-size-guide-table td:last-child {
+        border-right: 0;
     }
 
     .lk-size-guide-table thead th {
@@ -378,10 +469,6 @@
         border-bottom: 0;
     }
 
-    .lk-size-guide-table th:last-child,
-    .lk-size-guide-table td:last-child {
-        border-left: 0;
-    }
 
 /* Tips */
 .lk-size-guide-tips {
@@ -443,6 +530,13 @@
     background: linear-gradient(180deg, #fcfdff 0%, #f8fbfe 100%);
     border: 1.5px solid #48bae1;
     border-radius: 19px;
+}
+
+[dir="rtl"] .lk-size-guide-help {
+    direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-help {
     direction: ltr;
 }
 
@@ -450,6 +544,13 @@
     display: flex;
     align-items: center;
     gap: 14px;
+}
+
+[dir="rtl"] .lk-size-guide-help__team {
+    direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-help__team {
     direction: ltr;
 }
 
@@ -464,8 +565,16 @@
         min-width: 0;
         flex-direction: column;
         gap: 5px;
+    }
+
+    [dir="rtl"] .lk-size-guide-help__team div {
         direction: rtl;
         text-align: right;
+    }
+
+    [dir="ltr"] .lk-size-guide-help__team div {
+        direction: ltr;
+        text-align: left;
     }
 
     .lk-size-guide-help__team strong {
@@ -501,8 +610,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    direction: rtl;
     text-align: center;
+}
+
+[dir="rtl"] .lk-size-guide-help__copy {
+    direction: rtl;
+}
+
+[dir="ltr"] .lk-size-guide-help__copy {
+    direction: ltr;
 }
 
     .lk-size-guide-help__copy h2 {
@@ -530,6 +646,14 @@
         font-weight: 900;
         background: linear-gradient(100deg, #63c8e8, #35abd4);
         border-radius: 9px;
+    }
+
+    [dir="rtl"] .lk-size-guide-help__copy a {
+        direction: rtl;
+    }
+
+    [dir="ltr"] .lk-size-guide-help__copy a {
+        direction: ltr;
     }
 
         .lk-size-guide-help__copy a svg {

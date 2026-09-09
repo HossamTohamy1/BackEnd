@@ -412,6 +412,39 @@ namespace loxxking_backend_clean.Infrastructure.Migrations
                     b.ToTable("FavoritesPageConfigs");
                 });
 
+            modelBuilder.Entity("loxxking_backend_clean.Domain.Entities.HomePage.HomePageConfig", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SectionsJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HomePageConfigs");
+                });
+
             modelBuilder.Entity("loxxking_backend_clean.Domain.Entities.Inventory.InventoryItem", b =>
                 {
                     b.Property<Guid>("Id")

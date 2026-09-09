@@ -3,7 +3,7 @@ using loxxking_backend_clean.Domain.Entities.Support;
 
 namespace loxxking_backend_clean.Application.Features.Support.Queries.GetMyConversation;
 
-public record GetMyConversationQuery(Guid UserId) : IRequest<Result<ConversationWithMessagesResponse?>>;
+public record GetMyConversationQuery(Guid? UserId, string? GuestId = null) : IRequest<Result<ConversationWithMessagesResponse?>>;
 
 public record ConversationWithMessagesResponse(Guid Id, List<GetMessagesResponse> Messages);
 
@@ -18,12 +18,23 @@ public class GetMyConversationHandler : IRequestHandler<GetMyConversationQuery, 
 
     public async Task<Result<ConversationWithMessagesResponse?>> Handle(GetMyConversationQuery request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
-        if (user == null) return Result.Failure<ConversationWithMessagesResponse?>(new Error("Error.NotFound", "User not found"));
+        SupportConversation? conversation = null;
 
-        var conversation = await _context.SupportConversations
-            .Include(c => c.Messages)
-            .FirstOrDefaultAsync(c => c.CustomerEmail == user.Email || c.CustomerName == user.Name, cancellationToken);
+        if (request.UserId.HasValue && request.UserId.Value != Guid.Empty)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId.Value, cancellationToken);
+            if (user == null) return Result.Failure<ConversationWithMessagesResponse?>(new Error("Error.NotFound", "User not found"));
+
+            conversation = await _context.SupportConversations
+                .Include(c => c.Messages)
+                .FirstOrDefaultAsync(c => c.CustomerEmail == user.Email || c.CustomerName == user.Name, cancellationToken);
+        }
+        else if (!string.IsNullOrWhiteSpace(request.GuestId) && Guid.TryParse(request.GuestId, out _))
+        {
+            conversation = await _context.SupportConversations
+                .Include(c => c.Messages)
+                .FirstOrDefaultAsync(c => c.OrderNumber == $"guest:{request.GuestId}" || c.CustomerEmail == $"guest_{request.GuestId}@guest.local", cancellationToken);
+        }
 
         if (conversation == null)
             return Result.Success<ConversationWithMessagesResponse?>(null);
@@ -35,7 +46,7 @@ public class GetMyConversationHandler : IRequestHandler<GetMyConversationQuery, 
             m.CreatedAt,
             m.IsRead,
             m.SenderId == null || _context.Users.Any(u => u.Id == m.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Staff" : "Customer",
-            m.SenderId == null || _context.Users.Any(u => u.Id == m.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Support" : "Customer"
+            m.SenderId == null || _context.Users.Any(u => u.Id == m.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Support" : (m.GuestName ?? "Customer")
         )).ToList();
 
         return Result.Success<ConversationWithMessagesResponse?>(new ConversationWithMessagesResponse(conversation.Id, messages));

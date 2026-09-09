@@ -17,29 +17,40 @@ public class ReviewsController : ControllerBase
     public ReviewsController(ISender sender) { _sender = sender; }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] Guid? productId, CancellationToken ct)
+    public async Task<IActionResult> GetAll(
+        [FromQuery] Guid? productId,
+        [FromHeader(Name = "X-Guest-Id")] string? guestId,
+        CancellationToken ct)
     {
         if (productId.HasValue && productId.Value != Guid.Empty)
         {
             var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value ?? User.FindFirst("nameid")?.Value;
             var userId = userIdStr is not null && Guid.TryParse(userIdStr, out var id) ? (Guid?)id : null;
-            return (await _sender.Send(new GetReviewsByProductQuery(productId.Value, userId), ct)).ToApiResponse();
+            return (await _sender.Send(new GetReviewsByProductQuery(productId.Value, userId, guestId), ct)).ToApiResponse();
         }
         return (await _sender.Send(new GetPendingReviewsQuery(), ct)).ToApiResponse();
     }
 
     [HttpGet("product/{productId}")]
-    public async Task<IActionResult> GetByProduct(Guid productId, CancellationToken ct) {
+    public async Task<IActionResult> GetByProduct(
+        Guid productId,
+        [FromHeader(Name = "X-Guest-Id")] string? guestId,
+        CancellationToken ct)
+    {
         var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value ?? User.FindFirst("nameid")?.Value;
         var userId = userIdStr is not null && Guid.TryParse(userIdStr, out var id) ? (Guid?)id : null;
-        return (await _sender.Send(new GetReviewsByProductQuery(productId, userId), ct)).ToApiResponse();
+        return (await _sender.Send(new GetReviewsByProductQuery(productId, userId, guestId), ct)).ToApiResponse();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateReviewCommand cmd, CancellationToken ct) {
+    public async Task<IActionResult> Create(
+        [FromBody] CreateReviewCommand cmd,
+        [FromHeader(Name = "X-Guest-Id")] string? guestId,
+        CancellationToken ct)
+    {
         var userIdStr = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value ?? User.FindFirst("nameid")?.Value;
         var userId = userIdStr is not null && Guid.TryParse(userIdStr, out var id) ? id : Guid.Empty;
-        return (await _sender.Send(cmd with { UserId = userId }, ct)).ToApiResponse();
+        return (await _sender.Send(cmd with { UserId = userId, GuestId = guestId }, ct)).ToApiResponse();
     }
 
     [HttpGet("{id}")]

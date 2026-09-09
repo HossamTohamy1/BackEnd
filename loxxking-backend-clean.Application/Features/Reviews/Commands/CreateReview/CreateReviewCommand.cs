@@ -5,7 +5,8 @@ public record CreateReviewCommand(
     int Rating,
     string Comment,
     string? GuestName,
-    Guid UserId
+    Guid UserId,
+    string? GuestId = null
 ) : IRequest<Result<CreateReviewResponse>>;
 
 public record CreateReviewResponse(Guid Id);

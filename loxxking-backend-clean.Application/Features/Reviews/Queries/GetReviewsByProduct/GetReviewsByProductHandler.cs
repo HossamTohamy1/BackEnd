@@ -11,10 +11,20 @@ public class GetReviewsByProductHandler : IRequestHandler<GetReviewsByProductQue
 
     public async Task<Result<List<GetReviewsByProductResponse>>> Handle(GetReviewsByProductQuery request, CancellationToken cancellationToken)
     {
+        Guid? guestConversationId = null;
+        if (!string.IsNullOrWhiteSpace(request.GuestId) && Guid.TryParse(request.GuestId, out _))
+        {
+            guestConversationId = await _context.SupportConversations
+                .Where(c => c.OrderNumber == $"guest:{request.GuestId}" || c.CustomerEmail == $"guest_{request.GuestId}@guest.local")
+                .Select(c => (Guid?)c.Id)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
         var reviews = await _context.Reviews
             .Where(r => r.ProductId == request.ProductId && 
                         (r.Status == ReviewStatus.Approved || 
-                        (request.CurrentUserId.HasValue && request.CurrentUserId.Value != Guid.Empty && r.UserId == request.CurrentUserId.Value && r.Status == ReviewStatus.Pending)))
+                        (request.CurrentUserId.HasValue && request.CurrentUserId.Value != Guid.Empty && r.UserId == request.CurrentUserId.Value && r.Status == ReviewStatus.Pending) ||
+                        (guestConversationId.HasValue && r.UserId == null && r.Status == ReviewStatus.Pending && _context.SupportMessages.Any(m => m.ConversationId == guestConversationId.Value && m.RelatedReviewId == r.Id))))
             .OrderByDescending(r => r.CreatedAt)
             .Select(r => new GetReviewsByProductResponse(
                 r.Id,

@@ -21,6 +21,26 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApi();
 
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddPolicy("VisitorChatLimiter", context =>
+    {
+        var guestId = context.Request.Headers["X-Guest-Id"].ToString();
+        var clientIp = context.Connection.RemoteIpAddress?.ToString();
+        var key = !string.IsNullOrEmpty(guestId) ? guestId : (clientIp ?? "unknown");
+        return System.Threading.RateLimiting.RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: key,
+            factory: partition => new System.Threading.RateLimiting.FixedWindowRateLimiterOptions
+            {
+                AutoReplenishment = true,
+                PermitLimit = 15,
+                QueueLimit = 0,
+                Window = TimeSpan.FromMinutes(1)
+            });
+    });
+    options.RejectionStatusCode = 429;
+});
+
 var jwtSecret = builder.Configuration["Jwt:Secret"];
 if (string.IsNullOrWhiteSpace(jwtSecret))
 {
@@ -60,6 +80,8 @@ app.UseRequestLocalization(localizationOptions);
 loxxking_backend_clean.Api.Common.ResultExtensions.Configure(app.Services.GetRequiredService<Microsoft.AspNetCore.Http.IHttpContextAccessor>());
 
 app.UseCors("AllowFrontend");
+
+app.UseRateLimiter();
 
 app.UseDefaultFiles();
 app.UseStaticFiles(new StaticFileOptions

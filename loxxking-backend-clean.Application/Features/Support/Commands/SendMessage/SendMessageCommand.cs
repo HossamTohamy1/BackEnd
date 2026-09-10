@@ -7,7 +7,17 @@ public record SendMessageCommand(
     string? GuestName,
     bool IsStaff,
     string? GuestId = null,
-    string? ClientMessageId = null
+    string? ClientMessageId = null,
+    string? AttachmentUrl = null
 ) : IRequest<Result<SendMessageResponse>>;
 
-public record SendMessageResponse(Guid Id, Guid ConversationId, string SenderType, string SenderName, string Message, DateTime CreatedAt, string? ClientMessageId);
+public record SendMessageResponse(
+    Guid Id,
+    Guid ConversationId,
+    string SenderType,
+    string SenderName,
+    string Message,
+    DateTime CreatedAt,
+    string? ClientMessageId,
+    string? AttachmentUrl = null
+);

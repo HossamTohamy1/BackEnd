@@ -112,7 +112,8 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
                     senderName,
                     existing.Message,
                     existing.CreatedAt,
-                    existing.ClientMessageId
+                    existing.ClientMessageId,
+                    existing.AttachmentUrl
                 ));
             }
         }
@@ -125,6 +126,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             ConversationId = conversation.Id,
             IsRead = false,
             ClientMessageId = request.ClientMessageId,
+            AttachmentUrl = request.AttachmentUrl,
             IsSyncedToCrm = request.IsStaff // If it came from Staff (CRM), it's already in CRM, no need to sync back. If it's sent from Loxxking Admin Panel, it won't sync back? Wait. The task is VisitorChat. Staff replies come from CRM. If Staff replies from Loxxking admin panel, they might need sync to CRM, but we only have `IsStaff` flag. We will just say `IsSyncedToCrm = request.IsStaff` to avoid loops for now since all staff replies in visitor chat come from CRM in this flow.
         };
         _context.SupportMessages.Add(message);
@@ -146,7 +148,8 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             senderName,
             message.Message,
             message.CreatedAt,
-            message.ClientMessageId
+            message.ClientMessageId,
+            message.AttachmentUrl
         ));
     }
 }

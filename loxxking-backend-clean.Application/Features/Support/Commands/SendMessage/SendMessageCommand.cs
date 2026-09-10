@@ -6,7 +6,8 @@ public record SendMessageCommand(
     Guid UserId,
     string? GuestName,
     bool IsStaff,
-    string? GuestId = null
+    string? GuestId = null,
+    string? ClientMessageId = null
 ) : IRequest<Result<SendMessageResponse>>;
 
-public record SendMessageResponse(Guid Id, Guid ConversationId, string SenderType, string SenderName, string Message, DateTime CreatedAt);
+public record SendMessageResponse(Guid Id, Guid ConversationId, string SenderType, string SenderName, string Message, DateTime CreatedAt, string? ClientMessageId);

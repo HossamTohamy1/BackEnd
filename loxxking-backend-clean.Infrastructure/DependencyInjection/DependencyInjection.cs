@@ -106,6 +106,7 @@ public static class DependencyInjection
         services.AddScoped<IIpResolverService, loxxking_backend_clean.Infrastructure.Services.IpResolverService>();
         services.AddScoped<IGeolocationService, loxxking_backend_clean.Infrastructure.Services.GeolocationService>();
         services.AddHostedService<loxxking_backend_clean.Infrastructure.Services.OrderSyncBackgroundService>();
+        services.AddHostedService<loxxking_backend_clean.Infrastructure.Services.VisitorChatSyncBackgroundService>();
 
         services.AddSeeders();
 

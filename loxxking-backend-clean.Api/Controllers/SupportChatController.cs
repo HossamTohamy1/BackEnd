@@ -24,6 +24,7 @@ public class SupportChatController : ControllerBase
 
     [HttpPost("send")]
     [AllowAnonymous]
+    [Microsoft.AspNetCore.RateLimiting.EnableRateLimiting("VisitorChatLimiter")]
     public async Task<IActionResult> SendMessage(
         [FromBody] SendMessageCommand cmd,
         [FromHeader(Name = "X-Guest-Id")] string? guestId,
@@ -37,6 +38,7 @@ public class SupportChatController : ControllerBase
 
     [HttpPost("conversations/{conversationId:guid}/messages")]
     [AllowAnonymous]
+    [Microsoft.AspNetCore.RateLimiting.EnableRateLimiting("VisitorChatLimiter")]
     public async Task<IActionResult> SendConversationMessage(
         Guid conversationId,
         [FromBody] ChatMessageInputDto input,
@@ -47,7 +49,7 @@ public class SupportChatController : ControllerBase
         var userId = userIdStr is not null && Guid.TryParse(userIdStr, out var id) ? id : Guid.Empty;
         var isStaff = User.IsInRole("Admin") || User.IsInRole("StoreManager") || User.IsInRole("SalesEmployee");
         var text = input.Text ?? input.Message ?? "";
-        return (await _sender.Send(new SendMessageCommand(conversationId, text, userId, input.GuestName ?? input.Sender, isStaff, guestId, input.AttachmentUrl), ct)).ToApiResponse();
+        return (await _sender.Send(new SendMessageCommand(conversationId, text, userId, input.GuestName ?? input.Sender, isStaff, guestId, input.ClientMessageId, input.AttachmentUrl), ct)).ToApiResponse();
     }
 
     [HttpPost("upload")]
@@ -111,6 +113,28 @@ public class SupportChatController : ControllerBase
 
         return (await _sender.Send(new loxxking_backend_clean.Application.Features.Support.Queries.GetMyConversation.GetMyConversationQuery(userId, guestId), ct)).ToApiResponse();
     }
+
+    [HttpPost("incoming-from-crm")]
+    [AllowAnonymous]
+    public async Task<IActionResult> IncomingFromCrm([FromBody] IncomingCrmMessageDto dto, [FromHeader(Name = "X-CRM-Key")] string crmKey, [FromServices] Microsoft.Extensions.Configuration.IConfiguration configuration)
+    {
+        var expectedKey = configuration["LegacyCrm:IncomingKey"];
+        if (string.IsNullOrEmpty(expectedKey) || crmKey != expectedKey)
+        {
+            return Unauthorized();
+        }
+
+        if (!Guid.TryParse(dto.VisitorSessionId, out var conversationId))
+            return BadRequest("Invalid VisitorSessionId format.");
+
+        var text = dto.Message ?? "";
+        // Sending as Staff so it shows properly on Frontend (isStaff = true). We leave UserId empty since CRM employees don't map to Loxxking Users.
+        // We set GuestName to EmployeeName so frontend can display "EmployeeName" for the reply.
+        var cmd = new SendMessageCommand(conversationId, text, Guid.Empty, dto.EmployeeName, true, null, dto.ClientMessageId, dto.AttachmentUrl);
+
+        return (await _sender.Send(cmd)).ToApiResponse();
+    }
 }
 
-public record ChatMessageInputDto(string? Text, string? Message, string? Sender, string? AttachmentUrl, string? GuestName = null);
+public record ChatMessageInputDto(string? Text, string? Message, string? Sender, string? ClientMessageId, string? AttachmentUrl, string? GuestName = null);
+public record IncomingCrmMessageDto(string VisitorSessionId, string ClientMessageId, string StoreName, string? Message, string? AttachmentUrl, string EmployeeName);

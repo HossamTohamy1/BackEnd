@@ -1239,6 +1239,9 @@ namespace loxxking_backend_clean.Infrastructure.Migrations
                     b.Property<string>("AttachmentUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ClientMessageId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("ConversationId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1257,6 +1260,9 @@ namespace loxxking_backend_clean.Infrastructure.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsSyncedToCrm")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1272,6 +1278,15 @@ namespace loxxking_backend_clean.Infrastructure.Migrations
 
                     b.Property<Guid?>("SenderId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SyncAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SyncError")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SyncedToCrmAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");

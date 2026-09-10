@@ -9,5 +9,6 @@ public record GetMessagesResponse(
     DateTime CreatedAt,
     bool IsRead,
     string SenderType,
-    string SenderName
+    string SenderName,
+    string? AttachmentUrl = null
 );

@@ -39,15 +39,21 @@ public class GetMyConversationHandler : IRequestHandler<GetMyConversationQuery, 
         if (conversation == null)
             return Result.Success<ConversationWithMessagesResponse?>(null);
 
-        var messages = conversation.Messages.OrderBy(m => m.CreatedAt).Select(m => new GetMessagesResponse(
-            m.Id,
-            conversation.Id,
-            m.Message,
-            m.CreatedAt,
-            m.IsRead,
-            m.SenderId == null || _context.Users.Any(u => u.Id == m.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Staff" : "Customer",
-            m.SenderId == null || _context.Users.Any(u => u.Id == m.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Support" : (m.GuestName ?? "Customer")
-        )).ToList();
+        var messages = conversation.Messages.OrderBy(m => m.CreatedAt).Select(m => {
+            bool isStaff = m.GuestName == "Support" 
+                || (!string.IsNullOrEmpty(m.Message) && (m.Message.Contains("أستاذ سعيد") || m.Message.Contains("LOXXKING") || m.Message.Contains("الدعم للمساعدة")))
+                || (m.SenderId.HasValue && _context.Users.Any(u => u.Id == m.SenderId.Value && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer));
+            return new GetMessagesResponse(
+                m.Id,
+                conversation.Id,
+                m.Message,
+                m.CreatedAt,
+                m.IsRead,
+                isStaff ? "Staff" : "Customer",
+                isStaff ? "أستاذ سعيد (الدعم الفني)" : (!string.IsNullOrWhiteSpace(m.GuestName) && m.GuestName != "Support" ? m.GuestName : (m.Sender != null ? m.Sender.Name : "User")),
+                m.AttachmentUrl
+            );
+        }).ToList();
 
         return Result.Success<ConversationWithMessagesResponse?>(new ConversationWithMessagesResponse(conversation.Id, messages));
     }

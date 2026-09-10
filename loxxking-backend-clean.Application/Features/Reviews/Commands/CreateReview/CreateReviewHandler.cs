@@ -32,20 +32,23 @@ public class CreateReviewHandler : IRequestHandler<CreateReviewCommand, Result<C
             if (existing)
                 return Result.Failure<CreateReviewResponse>(new Error("Error.Validation", "Review_AlreadyReviewed"));
         }
-        else
+        string? guestName = null;
+        if (request.UserId == Guid.Empty)
         {
-            if (string.IsNullOrWhiteSpace(request.GuestName))
-                return Result.Failure<CreateReviewResponse>(new Error("Error.Validation", "Review_GuestNameRequired"));
+            guestName = string.IsNullOrWhiteSpace(request.GuestName)
+                ? $"user_{Guid.NewGuid().ToString("N")[..6]}"
+                : request.GuestName.Trim();
         }
 
         var review = Review.Create(
             request.ProductId,
             request.UserId != Guid.Empty ? request.UserId : null,
-            request.UserId == Guid.Empty ? request.GuestName : null,
+            guestName,
             loxxking_backend_clean.Domain.ValueObjects.RatingScore.FromInt(request.Rating),
             request.Comment
         );
 
+        review.Approve();
         _context.Reviews.Add(review);
         
         var admins = await _context.Users
@@ -68,18 +71,22 @@ public class CreateReviewHandler : IRequestHandler<CreateReviewCommand, Result<C
         Guid? staffSenderId = admins.FirstOrDefault();
         if (staffSenderId == Guid.Empty) staffSenderId = null;
 
-        if (request.UserId == Guid.Empty && !string.IsNullOrWhiteSpace(request.GuestId) && Guid.TryParse(request.GuestId, out _))
+        var effectiveGuestId = !string.IsNullOrWhiteSpace(request.GuestId) && Guid.TryParse(request.GuestId, out _)
+            ? request.GuestId
+            : Guid.NewGuid().ToString();
+
+        if (request.UserId == Guid.Empty)
         {
             var conversation = await _context.SupportConversations.Include(c => c.Messages)
-                .FirstOrDefaultAsync(c => c.OrderNumber == $"guest:{request.GuestId}" || c.CustomerEmail == $"guest_{request.GuestId}@guest.local", cancellationToken);
+                .FirstOrDefaultAsync(c => c.OrderNumber == $"guest:{effectiveGuestId}" || c.CustomerEmail == $"guest_{effectiveGuestId}@guest.local", cancellationToken);
 
             if (conversation == null)
             {
                 conversation = SupportConversation.Create(
-                    $"guest:{request.GuestId}",
+                    $"guest:{effectiveGuestId}",
                     request.GuestName ?? "Guest",
                     string.Empty,
-                    $"guest_{request.GuestId}@guest.local"
+                    $"guest_{effectiveGuestId}@guest.local"
                 );
                 _context.SupportConversations.Add(conversation);
             }
@@ -87,7 +94,7 @@ public class CreateReviewHandler : IRequestHandler<CreateReviewCommand, Result<C
             var supportMessage = new SupportMessage {
                 SenderId = staffSenderId,
                 RecipientId = null,
-                Message = "أهلاً بك في متجر LOXXKING، معك أستاذة فاطمة من الدعم، هنا لمساعدتك.",
+                Message = "أهلاً بك في متجر LOXXKING، معك أستاذ سعيد من الدعم للمساعدة.",
                 RelatedReviewId = review.Id,
                 GuestName = "Support",
                 ConversationId = conversation.Id,
@@ -118,7 +125,7 @@ public class CreateReviewHandler : IRequestHandler<CreateReviewCommand, Result<C
                 var supportMessage = new SupportMessage {
                     SenderId = staffSenderId,
                     RecipientId = request.UserId,
-                    Message = "أهلاً بك في متجر LOXXKING، معك أستاذة فاطمة من الدعم، هنا لمساعدتك.",
+                    Message = "أهلاً بك في متجر LOXXKING، معك أستاذ سعيد من الدعم للمساعدة.",
                     RelatedReviewId = review.Id,
                     GuestName = "Support",
                     ConversationId = conversation.Id,

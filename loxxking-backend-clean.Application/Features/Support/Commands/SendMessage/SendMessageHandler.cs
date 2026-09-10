@@ -16,7 +16,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
 
     public async Task<Result<SendMessageResponse>> Handle(SendMessageCommand request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(request.Message))
+        if (string.IsNullOrWhiteSpace(request.Message) && string.IsNullOrWhiteSpace(request.AttachmentUrl))
             return Result.Failure<SendMessageResponse>(new Error("Error.Validation", "Support_MessageEmpty"));
 
         User? user = null;
@@ -35,7 +35,6 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             if (conversation == null)
                 return Result.Failure<SendMessageResponse>(new Error("Error.NotFound", "Conversation not found"));
 
-            // Ownership validation
             if (!request.IsStaff)
             {
                 if (user != null)
@@ -56,7 +55,6 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
         }
         else
         {
-            // ConversationId is empty: find or create for user or guest
             if (user != null)
             {
                 conversation = await _context.SupportConversations.Include(c => c.Messages)
@@ -121,23 +119,23 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
         var message = new SupportMessage {
             SenderId = request.UserId != Guid.Empty ? request.UserId : null,
             RecipientId = null,
-            Message = request.Message,
+            Message = request.Message ?? string.Empty,
+            AttachmentUrl = request.AttachmentUrl,
             GuestName = request.UserId == Guid.Empty ? (request.GuestName ?? "Guest") : null,
             ConversationId = conversation.Id,
             IsRead = false,
             ClientMessageId = request.ClientMessageId,
-            AttachmentUrl = request.AttachmentUrl,
-            IsSyncedToCrm = request.IsStaff // If it came from Staff (CRM), it's already in CRM, no need to sync back. If it's sent from Loxxking Admin Panel, it won't sync back? Wait. The task is VisitorChat. Staff replies come from CRM. If Staff replies from Loxxking admin panel, they might need sync to CRM, but we only have `IsStaff` flag. We will just say `IsSyncedToCrm = request.IsStaff` to avoid loops for now since all staff replies in visitor chat come from CRM in this flow.
+            IsSyncedToCrm = request.IsStaff
         };
         _context.SupportMessages.Add(message);
 
         await _context.SaveChangesAsync(cancellationToken);
-        
+
         await _notificationService.NotifyMessageReceivedAsync(
             conversation.Id.ToString(),
             request.UserId != Guid.Empty ? request.UserId : null,
             senderName,
-            request.Message,
+            request.Message ?? "Attachment",
             message.CreatedAt
         );
 

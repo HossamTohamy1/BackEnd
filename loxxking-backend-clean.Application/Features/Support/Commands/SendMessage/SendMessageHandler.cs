@@ -16,7 +16,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
 
     public async Task<Result<SendMessageResponse>> Handle(SendMessageCommand request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(request.Message))
+        if (string.IsNullOrWhiteSpace(request.Message) && string.IsNullOrWhiteSpace(request.AttachmentUrl))
             return Result.Failure<SendMessageResponse>(new Error("Error.Validation", "Support_MessageEmpty"));
 
         User? user = null;
@@ -103,7 +103,8 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
         var message = new SupportMessage {
             SenderId = request.UserId != Guid.Empty ? request.UserId : null,
             RecipientId = null,
-            Message = request.Message,
+            Message = request.Message ?? string.Empty,
+            AttachmentUrl = request.AttachmentUrl,
             GuestName = request.UserId == Guid.Empty ? (request.GuestName ?? "Guest") : null,
             ConversationId = conversation.Id,
             IsRead = false
@@ -116,7 +117,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             conversation.Id.ToString(),
             request.UserId != Guid.Empty ? request.UserId : null,
             senderName,
-            request.Message,
+            request.Message ?? "Attachment",
             message.CreatedAt
         );
 
@@ -126,7 +127,8 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             senderType,
             senderName,
             message.Message,
-            message.CreatedAt
+            message.CreatedAt,
+            message.AttachmentUrl
         ));
     }
 }

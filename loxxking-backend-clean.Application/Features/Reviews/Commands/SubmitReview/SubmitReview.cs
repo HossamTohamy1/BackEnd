@@ -54,6 +54,7 @@ public class SubmitReviewHandler : IRequestHandler<SubmitReviewCommand, Result>
                 loxxking_backend_clean.Domain.ValueObjects.RatingScore.FromInt(request.Rating),
                 request.Comment
             );
+            review.Approve();
             _context.Reviews.Add(review);
         }
 
@@ -81,10 +82,11 @@ public class SubmitReviewHandler : IRequestHandler<SubmitReviewCommand, Result>
             var supportMessage = new SupportMessage {
                 SenderId = adminId,
                 RecipientId = request.UserId,
-                Message = "أهلاً بك في متجر LOXXKING، معك أستاذة فاطمة من الدعم، هنا لمساعدتك.",
+                Message = "أهلاً بك في متجر LOXXKING، معك أستاذ سعيد من الدعم للمساعدة.",
                 RelatedReviewId = review.Id,
                 GuestName = "Support",
-                ConversationId = conversation.Id
+                ConversationId = conversation.Id,
+                IsRead = false
             };
             _context.SupportMessages.Add(supportMessage);
 

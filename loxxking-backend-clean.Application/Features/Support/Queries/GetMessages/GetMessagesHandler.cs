@@ -20,8 +20,13 @@ public class GetMessagesHandler : IRequestHandler<GetMessagesQuery, Result<List<
                 sm.Message,
                 sm.CreatedAt,
                 sm.IsRead,
-                sm.SenderId == null || _context.Users.Any(u => u.Id == sm.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Staff" : (sm.GuestName != null ? "Guest" : "Customer"),
-                sm.SenderId == null || _context.Users.Any(u => u.Id == sm.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Support" : (sm.Sender != null ? sm.Sender.Name : (sm.GuestName ?? "Guest"))
+                sm.GuestName == "Support" 
+                    || (!string.IsNullOrEmpty(sm.Message) && (sm.Message.Contains("أستاذ سعيد") || sm.Message.Contains("LOXXKING") || sm.Message.Contains("الدعم للمساعدة")))
+                    || (sm.SenderId != null && _context.Users.Any(u => u.Id == sm.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer)) ? "Staff" : "Customer",
+                sm.GuestName == "Support" 
+                    || (!string.IsNullOrEmpty(sm.Message) && (sm.Message.Contains("أستاذ سعيد") || sm.Message.Contains("LOXXKING") || sm.Message.Contains("الدعم للمساعدة")))
+                    || (sm.SenderId != null && _context.Users.Any(u => u.Id == sm.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer)) ? "أستاذ سعيد (الدعم الفني)" : (sm.Sender != null ? sm.Sender.Name : (!string.IsNullOrWhiteSpace(sm.GuestName) && sm.GuestName != "Support" ? sm.GuestName : "User")),
+                sm.AttachmentUrl
             ))
             .ToListAsync(cancellationToken);
 

@@ -1,0 +1,261 @@
+[
+  {
+    "id": "prod-1",
+    "guid": "3D5D8C97-25BC-4457-A721-9EF43297FD54",
+    "slug": "pro-waist-cincher",
+    "nameEn": "Pro Waist Cincher Elite",
+    "nameAr": "مشد الخصر برو إيليت",
+    "descEn": "Maximum compression waist trainer with 9 steel bones. Thermogenic technology accelerates core heat for faster results. Breathable latex-free fabric with antimicrobial lining.",
+    "descAr": "مشد خصر بضغط أقصى مع 9 عظام فولاذية مرنة. تقنية حرارية تسرّع حرارة الجذع للحصول على نتائج أسرع. قماش مريح وقابل للتنفس مع دعم فائق للظهر والبطن.",
+    "price": 200,
+    "originalPrice": 250,
+    "images": [
+      "/assets/home/product-classic-black-hd.png",
+      "/assets/categories/category-men-reference.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "waist-trainers",
+    "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
+    "sizeChart": [
+      { "size": "XS", "waistCm": "58–63", "hipsCm": "83–88", "waistIn": "23–25", "hipsIn": "33–35" },
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" },
+      { "size": "3XL", "waistCm": "100–108", "hipsCm": "121–128", "waistIn": "39–42", "hipsIn": "48–50" }
+    ],
+    "stock": 42,
+    "rating": 4.9,
+    "reviewCount": 256,
+    "isBestSeller": true,
+    "badge": "20% OFF",
+    "colors": ["#060606", "#f5d4c2"],
+    "aliases": ["home-product-5", "classic-black", "offer-black-classic", "waist-beige"]
+  },
+  {
+    "id": "prod-2",
+    "guid": "B5C81145-3CB4-4309-B98C-C42360B503B4",
+    "slug": "full-body-shaper",
+    "nameEn": "Full Body Shaper Supreme",
+    "nameAr": "مشد كامل للجسم سوبريم",
+    "descEn": "Full-body compression shaper targeting waist, hips, thighs and back. Open-bust design for versatile wearing. Seamless under clothing.",
+    "descAr": "مشد ضغط للجسم الكامل يستهدف الخصر والأرداف والفخذين والظهر. تصميم مفتوح الصدر للارتداء المتعدد مع خامة ملساء غير مرئية تحت الملابس.",
+    "price": 260,
+    "originalPrice": 320,
+    "images": [
+      "/assets/home/product-full-body-hd.png",
+      "/assets/categories/category-full-body-reference.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "body-shapers",
+    "sizes": ["S", "M", "L", "XL", "2XL", "3XL"],
+    "sizeChart": [
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" },
+      { "size": "3XL", "waistCm": "100–108", "hipsCm": "121–128", "waistIn": "39–42", "hipsIn": "48–50" }
+    ],
+    "stock": 35,
+    "rating": 4.9,
+    "reviewCount": 184,
+    "isBestSeller": true,
+    "badge": "19% OFF",
+    "colors": ["#060606", "#f5d4c2"],
+    "aliases": ["home-product-1", "full-body", "body-sculpt"]
+  },
+  {
+    "id": "prod-3",
+    "guid": "853AEF5F-E41E-4235-B4AE-7B053C9CB122",
+    "slug": "postpartum-recovery-band",
+    "nameEn": "Postpartum Recovery Band",
+    "nameAr": "مشد ما بعد الولادة للتعافي",
+    "descEn": "Gentle yet effective postpartum support band. Helps with diastasis recti recovery, provides lower back support, and aids uterine contraction. OB-GYN recommended.",
+    "descAr": "مشد وحزام دعم ما بعد الولادة اللطيف والفعال. يساعد في دعم عضلات البطن والتعافي بعد الولادة ويوفر إسناداً مريحاً لمنطقة الظهر.",
+    "price": 210,
+    "originalPrice": 250,
+    "images": [
+      "/assets/home/product-postpartum-beige-hd.png",
+      "/assets/categories/category-postpartum-reference.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "postpartum",
+    "sizes": ["S", "M", "L", "XL", "2XL", "3XL"],
+    "sizeChart": [
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" },
+      { "size": "3XL", "waistCm": "100–108", "hipsCm": "121–128", "waistIn": "39–42", "hipsIn": "48–50" }
+    ],
+    "stock": 55,
+    "rating": 4.8,
+    "reviewCount": 196,
+    "isNew": true,
+    "badge": "New",
+    "colors": ["#f5d4c2", "#060606"],
+    "aliases": ["home-product-2", "postpartum", "postpartum-double"]
+  },
+  {
+    "id": "prod-4",
+    "guid": "E63251AA-D3B9-4DF5-9195-BC7C823DA991",
+    "slug": "sport-compression-vest",
+    "nameEn": "Sport Compression Vest",
+    "nameAr": "مشد وسترة ضغط رياضية",
+    "descEn": "High-performance compression vest for workouts and daily wear. 360° support, moisture-wicking fabric, and targeted abdominal compression.",
+    "descAr": "سترة ومشد ضغط عالي الأداء للتمارين والارتداء اليومي. دعم 360 درجة، قماش ماص للرطوبة، وضغط بطني مركّز وفعال.",
+    "price": 230,
+    "originalPrice": 270,
+    "images": [
+      "/assets/home/product-sport-black-hd.png",
+      "/assets/categories/category-sport-reference.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "compression-vests",
+    "sizes": ["XS", "S", "M", "L", "XL", "2XL"],
+    "sizeChart": [
+      { "size": "XS", "waistCm": "58–63", "hipsCm": "83–88", "waistIn": "23–25", "hipsIn": "33–35" },
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" }
+    ],
+    "stock": 33,
+    "rating": 4.7,
+    "reviewCount": 86,
+    "badge": "-15%",
+    "colors": ["#060606"],
+    "aliases": ["home-product-3", "sport", "men"]
+  },
+  {
+    "id": "prod-5",
+    "guid": "86230BC2-FE8B-4FA3-8B37-AE0DEE695420",
+    "slug": "lift-enhance-shorts",
+    "nameEn": "Lift & Enhance Shaper Shorts",
+    "nameAr": "مشد شورت رافع ومحسّن للقوام",
+    "descEn": "Seamless butt-lifting shorts with tummy control panel. Seamless construction, anti-slip waistband, and ultra-smooth finish under clothing.",
+    "descAr": "شورت مشد رافع للمؤخرة مع تحكم مشدود في البطن. تصميم ناعم بدون حواف ظاهرة مع حزام خصر مانع للانزلاق.",
+    "price": 220,
+    "originalPrice": 245,
+    "images": [
+      "/assets/categories/category-waist-reference.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "butt-lifters",
+    "sizes": ["S", "M", "L", "XL", "2XL", "3XL"],
+    "sizeChart": [
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" },
+      { "size": "3XL", "waistCm": "100–108", "hipsCm": "121–128", "waistIn": "39–42", "hipsIn": "48–50" }
+    ],
+    "stock": 67,
+    "rating": 4.7,
+    "reviewCount": 156,
+    "isBestSeller": true,
+    "badge": "Popular",
+    "colors": ["#f5d4c2", "#060606"],
+    "aliases": ["shorts"]
+  },
+  {
+    "id": "prod-6",
+    "guid": "E0D2C812-70F4-47FA-A04E-CE0EB1107567",
+    "slug": "daily-square-shaper",
+    "nameEn": "Daily Square Shaper",
+    "nameAr": "مشد يومي مربع مريح",
+    "descEn": "Soft beige everyday waist shaper with square cut. Flexible compression for all-day wear without discomfort.",
+    "descAr": "مشد يومي بيج مريح وخفيف مصمم للاستخدام اليومي لساعات طويلة مع راحة فائقة وتنسيق رائع للمظهر.",
+    "price": 195,
+    "originalPrice": 250,
+    "images": [
+      "/assets/home/product-beige-square-hd.png",
+      "/assets/categories/category-women-reference.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "waist-trainers",
+    "sizes": ["S", "M", "L", "XL", "2XL"],
+    "sizeChart": [
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" }
+    ],
+    "stock": 90,
+    "rating": 4.7,
+    "reviewCount": 96,
+    "badge": "22% OFF",
+    "colors": ["#f5d4c2", "#060606"],
+    "aliases": ["home-product-4", "daily-beige", "offer-beige-daily"]
+  },
+  {
+    "id": "prod-7",
+    "guid": "BDD5E994-0E39-44FD-A2B0-B4FB2CC9A8E2",
+    "slug": "front-open-shaper",
+    "nameEn": "Front-Open Bodysuit Shaper",
+    "nameAr": "مشد بودي سوت مفتوح الصدر",
+    "descEn": "Elegant front-open bodysuit shaper with adjustable shoulder straps and hook-and-eye closure. Perfect for special occasions.",
+    "descAr": "مشد بودي سوت أنيق مفتوح الصدر مع حمالات قابلة للتعديل وإغلاق أمامي محكم، مثالي لفساتين السهرة والمناسبات الخاصة.",
+    "price": 270,
+    "originalPrice": 315,
+    "images": [
+      "/assets/categories/category-women-reference.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "body-shapers",
+    "sizes": ["S", "M", "L", "XL", "2XL"],
+    "sizeChart": [
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" }
+    ],
+    "stock": 21,
+    "rating": 4.6,
+    "reviewCount": 53,
+    "isNew": true,
+    "badge": "Special",
+    "colors": ["#060606", "#f5d4c2"],
+    "aliases": ["front-open"]
+  },
+  {
+    "id": "prod-8",
+    "guid": "0DE366A0-1D1A-4C2E-99C1-F0B8D0D6722C",
+    "slug": "flexible-sport-waist-trainer",
+    "nameEn": "Flexible Sport Waist Trainer",
+    "nameAr": "مشد الخصر الرياضي المرن",
+    "descEn": "Sport-specific waist trainer with flexible spiral boning. Designed for intense workouts and core support with breathable outer layer.",
+    "descAr": "مشد خصر رياضي مرن وعالي المرونة مع عظام فولاذية حلزونية للتمارين والأنشطة الرياضية لدعم الظهر وشد البطن بفاعلية.",
+    "price": 235,
+    "originalPrice": 275,
+    "images": [
+      "/assets/categories/category-sport-reference.png",
+      "/assets/home/product-sport-black-hd.png",
+      "/assets/home/product-1.png"
+    ],
+    "category": "waist-trainers",
+    "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
+    "sizeChart": [
+      { "size": "XS", "waistCm": "58–63", "hipsCm": "83–88", "waistIn": "23–25", "hipsIn": "33–35" },
+      { "size": "S", "waistCm": "64–69", "hipsCm": "89–94", "waistIn": "25–27", "hipsIn": "35–37" },
+      { "size": "M", "waistCm": "70–76", "hipsCm": "95–100", "waistIn": "27–30", "hipsIn": "37–39" },
+      { "size": "L", "waistCm": "77–83", "hipsCm": "101–106", "waistIn": "30–33", "hipsIn": "40–42" },
+      { "size": "XL", "waistCm": "84–91", "hipsCm": "107–113", "waistIn": "33–36", "hipsIn": "42–44" },
+      { "size": "2XL", "waistCm": "92–99", "hipsCm": "114–120", "waistIn": "36–39", "hipsIn": "45–47" },
+      { "size": "3XL", "waistCm": "100–108", "hipsCm": "121–128", "waistIn": "39–42", "hipsIn": "48–50" }
+    ],
+    "stock": 38,
+    "rating": 4.7,
+    "reviewCount": 83,
+    "badge": "Sport",
+    "colors": ["#060606"],
+    "aliases": ["sport-black", "sport-waist"]
+  }
+]

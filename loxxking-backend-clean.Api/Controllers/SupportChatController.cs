@@ -47,7 +47,30 @@ public class SupportChatController : ControllerBase
         var userId = userIdStr is not null && Guid.TryParse(userIdStr, out var id) ? id : Guid.Empty;
         var isStaff = User.IsInRole("Admin") || User.IsInRole("StoreManager") || User.IsInRole("SalesEmployee");
         var text = input.Text ?? input.Message ?? "";
-        return (await _sender.Send(new SendMessageCommand(conversationId, text, userId, null, isStaff, guestId), ct)).ToApiResponse();
+        return (await _sender.Send(new SendMessageCommand(conversationId, text, userId, input.GuestName ?? input.Sender, isStaff, guestId, input.AttachmentUrl), ct)).ToApiResponse();
+    }
+
+    [HttpPost("upload")]
+    [AllowAnonymous]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadMedia(
+        IFormFile file,
+        [FromServices] loxxking_backend_clean.Application.Common.Interfaces.IFileStorageService fileStorage,
+        CancellationToken ct)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest(loxxking_backend_clean.Shared.ApiResponse<object>.Fail("File is required"));
+
+        var isAudio = file.ContentType.StartsWith("audio", StringComparison.OrdinalIgnoreCase) ||
+                      file.FileName.EndsWith(".webm", StringComparison.OrdinalIgnoreCase) ||
+                      file.FileName.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase) ||
+                      file.FileName.EndsWith(".wav", StringComparison.OrdinalIgnoreCase) ||
+                      file.FileName.EndsWith(".ogg", StringComparison.OrdinalIgnoreCase);
+
+        var folder = isAudio ? "chat/audio" : "chat/images";
+        using var stream = file.OpenReadStream();
+        var url = await fileStorage.UploadAsync(stream, file.FileName, file.ContentType, folder, ct);
+        return Ok(loxxking_backend_clean.Shared.ApiResponse<object>.Ok(new { url }));
     }
 
     [HttpGet("conversations")]
@@ -90,4 +113,4 @@ public class SupportChatController : ControllerBase
     }
 }
 
-public record ChatMessageInputDto(string? Text, string? Message, string? Sender);
+public record ChatMessageInputDto(string? Text, string? Message, string? Sender, string? AttachmentUrl, string? GuestName = null);

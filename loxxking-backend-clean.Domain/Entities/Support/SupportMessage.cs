@@ -13,6 +13,7 @@ public class SupportMessage : BaseEntity {
     public Guid? RelatedReviewId { get; set; }
     public string? GuestName { get; set; }
     public bool IsRead { get; set; }
+    public bool IsStaff { get; set; }
 
     // CRM Integration Fields
     public string? ClientMessageId { get; set; } // For idempotency from frontend

@@ -28,19 +28,48 @@ public class VisitorChatSyncBackgroundService : BackgroundService
     {
         _logger.LogInformation("VisitorChatSyncBackgroundService is starting.");
 
+        // Give the host time to fully start before doing work
+        try
+        {
+            await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+
         while (!stoppingToken.IsCancellationRequested)
         {
             try
             {
                 await ProcessPendingMessagesAsync(stoppingToken);
             }
+            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+            {
+                // Host is shutting down, exit gracefully
+                break;
+            }
+            catch (ObjectDisposedException)
+            {
+                // ServiceProvider disposed during shutdown, exit gracefully
+                break;
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occurred executing VisitorChatSyncBackgroundService.");
             }
 
-            await Task.Delay(_delay, stoppingToken);
+            try
+            {
+                await Task.Delay(_delay, stoppingToken);
+            }
+            catch (OperationCanceledException)
+            {
+                break;
+            }
         }
+
+        _logger.LogInformation("VisitorChatSyncBackgroundService is stopping.");
     }
 
     private async Task ProcessPendingMessagesAsync(CancellationToken stoppingToken)
@@ -58,10 +87,10 @@ public class VisitorChatSyncBackgroundService : BackgroundService
 
         if (string.IsNullOrEmpty(baseUrl) || string.IsNullOrEmpty(apiKey)) return;
 
-        // Note: we only sync messages sent by Guest (SenderId == null, GuestName != null)
-        // OR by a user if that is the case. Usually visitors don't have SenderId.
+        // Sync ALL pending messages to CRM (both guest and logged-in users)
         var pendingMessages = await dbContext.SupportMessages
-            .Where(m => !m.IsSyncedToCrm && m.SyncAttempts < _maxAttempts && m.SenderId == null)
+            .Include(m => m.Sender)
+            .Where(m => !m.IsSyncedToCrm && !m.IsStaff && m.SyncAttempts < _maxAttempts)
             .OrderBy(m => m.CreatedAt)
             .Take(50)
             .ToListAsync(stoppingToken);
@@ -84,7 +113,7 @@ public class VisitorChatSyncBackgroundService : BackgroundService
                     StoreName = "Loxxking",
                     Message = message.Message,
                     AttachmentUrl = message.AttachmentUrl,
-                    SenderName = message.GuestName ?? "Guest"
+                    SenderName = message.GuestName ?? message.Sender?.Name ?? "Guest"
                 };
 
                 var response = await client.PostAsJsonAsync("api/VisitorChat/IncomingMessage", payload, stoppingToken);

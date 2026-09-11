@@ -8,7 +8,8 @@ public record SendMessageCommand(
     bool IsStaff,
     string? GuestId = null,
     string? ClientMessageId = null,
-    string? AttachmentUrl = null
+    string? AttachmentUrl = null,
+    bool IsFromCrm = false
 ) : IRequest<Result<SendMessageResponse>>;
 
 public record SendMessageResponse(

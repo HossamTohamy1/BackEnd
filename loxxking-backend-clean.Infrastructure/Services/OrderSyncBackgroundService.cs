@@ -23,19 +23,46 @@ public class OrderSyncBackgroundService : BackgroundService
     {
         _logger.LogInformation("OrderSyncBackgroundService is starting.");
 
+        // Give the host time to fully start before doing work
+        try
+        {
+            await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+
         while (!stoppingToken.IsCancellationRequested)
         {
             try
             {
                 await ProcessPendingOrdersAsync(stoppingToken);
             }
+            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+            {
+                // Host is shutting down, exit gracefully
+                break;
+            }
+            catch (ObjectDisposedException)
+            {
+                // ServiceProvider disposed during shutdown, exit gracefully
+                break;
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while processing pending orders for sync.");
             }
 
-            // Wait for 15 seconds before checking again
-            await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
+            try
+            {
+                // Wait for 15 seconds before checking again
+                await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
+            }
+            catch (OperationCanceledException)
+            {
+                break;
+            }
         }
 
         _logger.LogInformation("OrderSyncBackgroundService is stopping.");

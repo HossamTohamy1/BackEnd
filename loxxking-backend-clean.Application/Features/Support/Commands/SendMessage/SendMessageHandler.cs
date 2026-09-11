@@ -97,8 +97,9 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             }
         }
 
-        string senderType = request.IsStaff ? "Staff" : (request.UserId != Guid.Empty ? "Customer" : "Guest");
-        string senderName = request.IsStaff ? (request.GuestName ?? "Support") : (user != null ? (user.Name ?? "Customer") : (request.GuestName ?? "Guest"));
+        bool isStaff = request.IsStaff || request.IsFromCrm;
+        string senderType = isStaff ? "Staff" : (request.UserId != Guid.Empty ? "Customer" : "Guest");
+        string senderName = isStaff ? (request.GuestName ?? "Support") : (user != null ? (user.Name ?? "Customer") : (request.GuestName ?? "Guest"));
 
         if (!string.IsNullOrWhiteSpace(request.ClientMessageId))
         {
@@ -122,12 +123,13 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             SenderId = request.UserId != Guid.Empty ? request.UserId : null,
             RecipientId = null,
             Message = request.Message,
-            GuestName = request.UserId == Guid.Empty ? (request.GuestName ?? "Guest") : null,
+            GuestName = request.UserId == Guid.Empty ? (request.GuestName ?? (isStaff ? "Support" : "Guest")) : null,
             ConversationId = conversation.Id,
             IsRead = false,
             ClientMessageId = request.ClientMessageId,
             AttachmentUrl = request.AttachmentUrl,
-            IsSyncedToCrm = request.IsStaff // If it came from Staff (CRM), it's already in CRM, no need to sync back. If it's sent from Loxxking Admin Panel, it won't sync back? Wait. The task is VisitorChat. Staff replies come from CRM. If Staff replies from Loxxking admin panel, they might need sync to CRM, but we only have `IsStaff` flag. We will just say `IsSyncedToCrm = request.IsStaff` to avoid loops for now since all staff replies in visitor chat come from CRM in this flow.
+            IsSyncedToCrm = request.IsFromCrm,
+            IsStaff = isStaff
         };
         _context.SupportMessages.Add(message);
 
@@ -138,7 +140,10 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             request.UserId != Guid.Empty ? request.UserId : null,
             senderName,
             request.Message,
-            message.CreatedAt
+            message.CreatedAt,
+            message.AttachmentUrl,
+            isStaff,
+            senderType
         );
 
         return Result.Success(new SendMessageResponse(

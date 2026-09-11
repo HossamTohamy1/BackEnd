@@ -27,12 +27,14 @@ public class GetMyConversationHandler : IRequestHandler<GetMyConversationQuery, 
 
             conversation = await _context.SupportConversations
                 .Include(c => c.Messages)
+                    .ThenInclude(m => m.Sender)
                 .FirstOrDefaultAsync(c => c.CustomerEmail == user.Email || c.CustomerName == user.Name, cancellationToken);
         }
         else if (!string.IsNullOrWhiteSpace(request.GuestId) && Guid.TryParse(request.GuestId, out _))
         {
             conversation = await _context.SupportConversations
                 .Include(c => c.Messages)
+                    .ThenInclude(m => m.Sender)
                 .FirstOrDefaultAsync(c => c.OrderNumber == $"guest:{request.GuestId}" || c.CustomerEmail == $"guest_{request.GuestId}@guest.local", cancellationToken);
         }
 
@@ -45,8 +47,9 @@ public class GetMyConversationHandler : IRequestHandler<GetMyConversationQuery, 
             m.Message,
             m.CreatedAt,
             m.IsRead,
-            m.SenderId == null || _context.Users.Any(u => u.Id == m.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Staff" : "Customer",
-            m.SenderId == null || _context.Users.Any(u => u.Id == m.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Support" : (m.GuestName ?? "Customer")
+            m.IsStaff ? "Staff" : (m.SenderId != null ? "Customer" : "Guest"),
+            m.IsStaff ? (m.GuestName ?? "Support") : (m.Sender != null ? m.Sender.Name : (m.GuestName ?? "Customer")),
+            m.AttachmentUrl
         )).ToList();
 
         return Result.Success<ConversationWithMessagesResponse?>(new ConversationWithMessagesResponse(conversation.Id, messages));

@@ -13,7 +13,7 @@ public class GetProfileHandler : IRequestHandler<GetProfileQuery, Result<GetProf
     {
         var user = await _context.Users
             .Where(u => u.Id == request.UserId)
-            .Select(u => new GetProfileResponse(u.Id, u.Name, u.Email, u.PhoneNumber!, u.CountryId, u.Country.Name))
+            .Select(u => new GetProfileResponse(u.Id, u.Name, u.Email, u.PhoneNumber!, u.CountryId, u.Country.Name, u.Role.ToString()))
             .FirstOrDefaultAsync(cancellationToken);
 
         if (user is null)

@@ -13,14 +13,25 @@ public class SupportNotificationService : ISupportNotificationService
         _hubContext = hubContext;
     }
 
-    public async Task NotifyMessageReceivedAsync(string conversationId, Guid? userId, string? userName, string message, DateTime timestamp)
+    public async Task NotifyMessageReceivedAsync(
+        string conversationId,
+        Guid? userId,
+        string? userName,
+        string message,
+        DateTime timestamp,
+        string? attachmentUrl = null,
+        bool isStaff = false,
+        string senderType = "Customer")
     {
         await _hubContext.Clients.Group($"conversation_{conversationId}").SendAsync("ReceiveMessage", new
         {
             userId,
             userName,
             message,
-            timestamp
+            timestamp,
+            attachmentUrl,
+            isStaff,
+            senderType
         });
     }
 }

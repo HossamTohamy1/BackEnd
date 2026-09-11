@@ -97,16 +97,39 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             }
         }
 
-        string senderType = request.IsStaff ? "Staff" : (request.UserId != Guid.Empty ? "Customer" : "Guest");
-        string senderName = request.IsStaff ? "Support" : (user != null ? user.Name : (request.GuestName ?? "Guest"));
+        bool isStaff = request.IsStaff || request.IsFromCrm;
+        string senderType = isStaff ? "Staff" : (request.UserId != Guid.Empty ? "Customer" : "Guest");
+        string senderName = isStaff ? (request.GuestName ?? "Support") : (user != null ? (user.Name ?? "Customer") : (request.GuestName ?? "Guest"));
+
+        if (!string.IsNullOrWhiteSpace(request.ClientMessageId))
+        {
+            var existing = await _context.SupportMessages.FirstOrDefaultAsync(m => m.ClientMessageId == request.ClientMessageId, cancellationToken);
+            if (existing != null)
+            {
+                return Result.Success(new SendMessageResponse(
+                    existing.Id,
+                    existing.ConversationId,
+                    senderType,
+                    senderName,
+                    existing.Message,
+                    existing.CreatedAt,
+                    existing.ClientMessageId,
+                    existing.AttachmentUrl
+                ));
+            }
+        }
 
         var message = new SupportMessage {
             SenderId = request.UserId != Guid.Empty ? request.UserId : null,
             RecipientId = null,
             Message = request.Message,
-            GuestName = request.UserId == Guid.Empty ? (request.GuestName ?? "Guest") : null,
+            GuestName = request.UserId == Guid.Empty ? (request.GuestName ?? (isStaff ? "Support" : "Guest")) : null,
             ConversationId = conversation.Id,
-            IsRead = false
+            IsRead = false,
+            ClientMessageId = request.ClientMessageId,
+            AttachmentUrl = request.AttachmentUrl,
+            IsSyncedToCrm = request.IsFromCrm,
+            IsStaff = isStaff
         };
         _context.SupportMessages.Add(message);
 
@@ -117,7 +140,10 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             request.UserId != Guid.Empty ? request.UserId : null,
             senderName,
             request.Message,
-            message.CreatedAt
+            message.CreatedAt,
+            message.AttachmentUrl,
+            isStaff,
+            senderType
         );
 
         return Result.Success(new SendMessageResponse(
@@ -126,7 +152,9 @@ public class SendMessageHandler : IRequestHandler<SendMessageCommand, Result<Sen
             senderType,
             senderName,
             message.Message,
-            message.CreatedAt
+            message.CreatedAt,
+            message.ClientMessageId,
+            message.AttachmentUrl
         ));
     }
 }

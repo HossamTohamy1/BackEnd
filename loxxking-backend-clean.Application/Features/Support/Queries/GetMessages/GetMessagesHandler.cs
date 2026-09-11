@@ -20,8 +20,9 @@ public class GetMessagesHandler : IRequestHandler<GetMessagesQuery, Result<List<
                 sm.Message,
                 sm.CreatedAt,
                 sm.IsRead,
-                sm.SenderId == null || _context.Users.Any(u => u.Id == sm.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Staff" : (sm.GuestName != null ? "Guest" : "Customer"),
-                sm.SenderId == null || _context.Users.Any(u => u.Id == sm.SenderId && u.Role != loxxking_backend_clean.Domain.Enums.UserRole.Customer) ? "Support" : (sm.Sender != null ? sm.Sender.Name : (sm.GuestName ?? "Guest"))
+                sm.IsStaff ? "Staff" : (sm.SenderId != null ? "Customer" : "Guest"),
+                sm.IsStaff ? (sm.GuestName ?? "Support") : (sm.Sender != null ? sm.Sender.Name : (sm.GuestName ?? "Customer")),
+                sm.AttachmentUrl
             ))
             .ToListAsync(cancellationToken);
 

@@ -95,6 +95,11 @@ public static class DependencyInjection
         services.AddHttpClient("LegacyCrmClient", client => 
         { 
             client.Timeout = TimeSpan.FromSeconds(configuration.GetValue<int>("LegacyCrm:TimeoutSeconds", 15)); 
+        })
+        .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+        {
+            // Accept self-signed SSL certificates for local dev CRM
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
         });
 
         services.AddScoped<IInvoicePdfGenerator, loxxking_backend_clean.Infrastructure.Services.QuestPdfInvoiceGenerator>();
@@ -106,6 +111,7 @@ public static class DependencyInjection
         services.AddScoped<IIpResolverService, loxxking_backend_clean.Infrastructure.Services.IpResolverService>();
         services.AddScoped<IGeolocationService, loxxking_backend_clean.Infrastructure.Services.GeolocationService>();
         services.AddHostedService<loxxking_backend_clean.Infrastructure.Services.OrderSyncBackgroundService>();
+        services.AddHostedService<loxxking_backend_clean.Infrastructure.Services.VisitorChatSyncBackgroundService>();
 
         services.AddSeeders();
 

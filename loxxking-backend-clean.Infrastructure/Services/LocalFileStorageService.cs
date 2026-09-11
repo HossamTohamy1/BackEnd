@@ -37,6 +37,11 @@ public class LocalFileStorageService : IFileStorageService
                 "image/png" => ".png",
                 "image/webp" => ".webp",
                 "image/jpeg" or "image/jpg" => ".jpg",
+                "audio/webm" => ".webm",
+                "audio/mp4" or "audio/m4a" => ".m4a",
+                "audio/ogg" => ".ogg",
+                "audio/wav" or "audio/x-wav" => ".wav",
+                "audio/mpeg" or "audio/mp3" => ".mp3",
                 _ => ".jpg"
             };
         }

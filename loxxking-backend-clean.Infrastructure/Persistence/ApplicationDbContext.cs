@@ -49,10 +49,20 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
     public DbSet<FavoriteItem> FavoriteItems { get; set; }
     public DbSet<FavoritesPageConfig> FavoritesPageConfigs => Set<FavoritesPageConfig>();
     public DbSet<loxxking_backend_clean.Domain.Entities.HomePage.HomePageConfig> HomePageConfigs => Set<loxxking_backend_clean.Domain.Entities.HomePage.HomePageConfig>();
+    public DbSet<loxxking_backend_clean.Domain.Entities.PageConfigurations.PageConfiguration> PageConfigurations => Set<loxxking_backend_clean.Domain.Entities.PageConfigurations.PageConfiguration>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<loxxking_backend_clean.Domain.Entities.PageConfigurations.PageConfiguration>(b =>
+        {
+            b.ToTable("PageConfigurations");
+            b.HasKey(c => c.Key);
+            b.Property(c => c.Key).HasMaxLength(100).IsRequired();
+            b.Property(c => c.ConfigJson).IsRequired();
+            b.Property(c => c.UpdatedAt).IsRequired();
+        });
 
         builder.Entity<User>(b =>
         {

@@ -43,6 +43,7 @@ public interface IApplicationDbContext
     DbSet<FavoriteItem> FavoriteItems { get; }
     DbSet<FavoritesPageConfig> FavoritesPageConfigs { get; }
     DbSet<loxxking_backend_clean.Domain.Entities.HomePage.HomePageConfig> HomePageConfigs { get; }
+    DbSet<loxxking_backend_clean.Domain.Entities.PageConfigurations.PageConfiguration> PageConfigurations { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

@@ -28,13 +28,13 @@
 ## Project Setup & Running
 - **SDK**: .NET 10.
 - **Build**:
-  ```bash
+```bash
   dotnet build
-  ```
+```
 - **Run**:
-  ```bash
+```bash
   cd loxxking-backend-clean.Api
   dotnet run
-  ```
+```
 - **Configuration**: Ensure `ConnectionStrings:DefaultConnection` and `LegacyCrm` settings are configured in `appsettings.json`.
 See the `README.md` inside each specific project for layer-specific rules.
